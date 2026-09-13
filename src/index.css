@@ -70,15 +70,31 @@ input:focus-visible,
   outline-offset: 2px !important;
 }
 
-html, body {
+html {
   width: 100%;
   height: 100%;
+  height: -webkit-fill-available;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  touch-action: manipulation;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  min-height: 100dvh;
   background-color: var(--bg-page);
   color: var(--text-primary);
   font-family: var(--font-family);
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  overscroll-behavior-y: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* RTL Support */
@@ -89,6 +105,8 @@ body.rtl {
 #root {
   width: 100%;
   min-height: 100vh;
+  min-height: -webkit-fill-available;
+  min-height: 100dvh;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -96,11 +114,12 @@ body.rtl {
   font-family: var(--font-family);
 }
 
-/* Responsive Browser Viewport (NO Mockup Frame, NO Borders, NO Phone Notches) */
+/* Responsive Universal Viewport (Pixel-perfect on all iPhones & Androids) */
 .app-viewport {
   width: 100%;
-  max-width: 600px;
+  max-width: 480px;
   height: 100vh;
+  height: -webkit-fill-available;
   height: 100dvh;
   background-color: #ffffff;
   position: relative;
@@ -113,26 +132,33 @@ body.rtl {
   border-bottom: none;
   border-radius: 0 !important;
   margin: 0 auto;
+  box-shadow: none !important;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 480px) {
   .app-viewport {
     max-width: 100%;
+    width: 100vw;
     border-left: none;
     border-right: none;
   }
 }
 
-/* Scrollable Screen Content Container */
+/* Scrollable Screen Content Container with Safe Area Insets */
 .screen-content {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding-bottom: 85px;
+  padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
   position: relative;
-  scrollbar-width: thin;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   background-color: var(--bg-page);
   -webkit-overflow-scrolling: touch;
+}
+
+.screen-content::-webkit-scrollbar {
+  display: none;
 }
 
 /* Global Typescale Helpers */
