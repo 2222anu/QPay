@@ -97,11 +97,11 @@ export const HomeScreen: React.FC = () => {
       {/* 4. Quick Actions Container Card */}
       <div
         style={{
-          margin: '0 clamp(12px, 3.5vw, 20px) 16px clamp(12px, 3.5vw, 20px)',
+          margin: '0 16px 16px 16px',
           backgroundColor: '#ffffff',
           border: '1px solid #e2e8f0',
           borderRadius: '14px',
-          padding: '20px clamp(12px, 3.5vw, 18px)',
+          padding: '20px 16px',
           boxShadow: 'none',
         }}
       >
@@ -256,11 +256,11 @@ export const HomeScreen: React.FC = () => {
       {/* 5. BBPS Services Container Card */}
       <div
         style={{
-          margin: '0 clamp(12px, 3.5vw, 20px) 16px clamp(12px, 3.5vw, 20px)',
+          margin: '0 16px 16px 16px',
           backgroundColor: '#ffffff',
           border: '1px solid #e2e8f0',
           borderRadius: '14px',
-          padding: '20px clamp(12px, 3.5vw, 18px)',
+          padding: '20px 16px',
           boxShadow: 'none',
         }}
       >
@@ -429,11 +429,11 @@ export const HomeScreen: React.FC = () => {
       {/* 5b. Fintech Hub: Cards & Merchant Suite */}
       <div
         style={{
-          margin: '0 clamp(12px, 3.5vw, 20px) 16px clamp(12px, 3.5vw, 20px)',
+          margin: '0 16px 16px 16px',
           backgroundColor: '#ffffff',
           border: '1px solid #e2e8f0',
           borderRadius: '14px',
-          padding: '18px clamp(12px, 3.5vw, 18px)',
+          padding: '18px 16px',
           boxShadow: 'none',
         }}
       >
@@ -558,7 +558,7 @@ export const HomeScreen: React.FC = () => {
       </div>
 
       {/* 6. Recent Transactions Section */}
-      <div style={{ padding: '0 clamp(12px, 3.5vw, 20px)', marginBottom: '24px' }}>
+      <div style={{ padding: '0 16px', marginBottom: '24px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
           <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#0f172a' }}>Recent Activity</h3>
           <button

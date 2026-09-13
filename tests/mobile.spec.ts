@@ -119,6 +119,43 @@ test.describe('Mobile Viewports & Touch Experience Verification Suite', () => {
         }
       });
 
+      test('Bank Account Cards left alignment and equal dimensions', async ({ page }) => {
+        await page.goto('/?screen=HOME');
+        await page.waitForLoadState('domcontentloaded');
+
+        const banner = page.locator('.qpay-hero-banner-container');
+        await expect(banner).toBeVisible();
+        const bannerBox = await banner.boundingBox();
+
+        const heading = page.locator('h3:has-text("My Bank Accounts")');
+        await expect(heading).toBeVisible();
+        const headingBox = await heading.boundingBox();
+
+        const bankCards = page.locator('[data-bank-card]');
+        const cardCount = await bankCards.count();
+        expect(cardCount).toBeGreaterThanOrEqual(2);
+
+        const firstCardBox = await bankCards.first().boundingBox();
+        expect(bannerBox).not.toBeNull();
+        expect(headingBox).not.toBeNull();
+        expect(firstCardBox).not.toBeNull();
+
+        if (bannerBox && headingBox && firstCardBox) {
+          // Left edge of banner, heading, and first bank card must align within 2px tolerance
+          expect(Math.abs(firstCardBox.x - bannerBox.x)).toBeLessThanOrEqual(2);
+          expect(Math.abs(firstCardBox.x - headingBox.x)).toBeLessThanOrEqual(2);
+        }
+
+        // All bank cards must maintain equal width and height
+        const firstWidth = firstCardBox?.width;
+        const firstHeight = firstCardBox?.height;
+        for (let i = 1; i < cardCount; i++) {
+          const box = await bankCards.nth(i).boundingBox();
+          expect(box?.width).toBeCloseTo(firstWidth || 0, 0);
+          expect(box?.height).toBeCloseTo(firstHeight || 0, 0);
+        }
+      });
+
       test('End-to-End Mobile Merchant Journey: Mobile -> OTP -> Merchant Selection -> Setup -> SoftPOS -> Success', async ({ page }) => {
         // 1. Mobile Number entry
         await page.goto('/?screen=MOBILE_NUMBER');
@@ -132,9 +169,13 @@ test.describe('Mobile Viewports & Touch Experience Verification Suite', () => {
         await expect(verifyBtn).toBeVisible();
         await verifyBtn.click();
 
-        // 3. Account Type Selector Modal
-        const merchantChoice = page.locator('text=Merchant Business');
+        // 3. Account Type Selector Modal: only CUSTOMER and MERCHANT, no extra text
+        await expect(page.locator('text=CUSTOMER')).toBeVisible();
+        const merchantChoice = page.locator('text=MERCHANT');
         await expect(merchantChoice).toBeVisible();
+        await expect(page.locator('text=Personal Customer')).toHaveCount(0);
+        await expect(page.locator('text=Pay via UPI QR')).toHaveCount(0);
+        await expect(page.locator('text=SoftPOS Tap')).toHaveCount(0);
         await merchantChoice.click();
 
         // 4. Merchant Setup Screen

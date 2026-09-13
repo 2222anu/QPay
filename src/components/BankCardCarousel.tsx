@@ -88,7 +88,8 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
 
   const handleScroll = () => {
     if (!carouselRef.current) return;
-    const cardWidth = Math.min(295, window.innerWidth * 0.8);
+    const card = carouselRef.current.querySelector('[data-bank-card]') as HTMLElement;
+    const cardWidth = card ? card.offsetWidth + 14 : 300;
     const scrollPos = carouselRef.current.scrollLeft;
     const index = Math.round(scrollPos / cardWidth);
     setActiveCardIndex(Math.min(Math.max(index, 0), banks.length - 1));
@@ -116,7 +117,7 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          padding: '0 20px',
+          padding: '0 16px',
           marginBottom: '12px',
         }}
       >
@@ -170,7 +171,9 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
           gap: '14px',
           overflowX: 'auto',
           scrollSnapType: isMouseDown ? 'none' : 'x mandatory',
-          padding: '4px 20px 8px 20px',
+          scrollPadding: '0 16px',
+          scrollPaddingLeft: '16px',
+          padding: '4px 16px 8px 16px',
           scrollbarWidth: 'none',
           WebkitOverflowScrolling: 'touch',
           cursor: isMouseDown ? 'grabbing' : 'grab',
@@ -184,11 +187,17 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
           return (
             <div
               key={bank.id}
+              data-bank-card
               onClick={() => navigateTo('BANK_ACCOUNTS')}
               style={{
                 scrollSnapAlign: 'start',
-                flex: '0 0 min(295px, 82vw)',
+                flex: '0 0 clamp(285px, 78vw, 300px)',
+                width: 'clamp(285px, 78vw, 300px)',
+                minWidth: 'clamp(285px, 78vw, 300px)',
+                maxWidth: 'clamp(285px, 78vw, 300px)',
                 height: '175px',
+                minHeight: '175px',
+                maxHeight: '175px',
                 background: style.gradient,
                 borderRadius: '14px',
                 padding: '16px 18px',
@@ -248,7 +257,20 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
                     <Landmark size={17} color="#ffffff" />
                   </div>
                   <div>
-                    <div style={{ fontSize: '13px', fontWeight: 800, color: '#ffffff', letterSpacing: '0.02em', lineHeight: '16px' }}>
+                    <div
+                      style={{
+                        fontSize: '13px',
+                        fontWeight: 800,
+                        color: '#ffffff',
+                        letterSpacing: '0.02em',
+                        lineHeight: '16px',
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        maxWidth: '160px',
+                      }}
+                      title={style.tagText}
+                    >
                       {style.tagText}
                     </div>
                     <div style={{ fontSize: '10.5px', color: 'rgba(255, 255, 255, 0.75)', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '4px' }}>
@@ -340,8 +362,13 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
           onClick={() => setIsAddBankModalOpen(true)}
           style={{
             scrollSnapAlign: 'start',
-            flex: '0 0 135px',
+            flex: '0 0 130px',
+            width: '130px',
+            minWidth: '130px',
+            maxWidth: '130px',
             height: '175px',
+            minHeight: '175px',
+            maxHeight: '175px',
             backgroundColor: '#ffffff',
             border: '2px dashed #cbd5e1',
             borderRadius: '14px',

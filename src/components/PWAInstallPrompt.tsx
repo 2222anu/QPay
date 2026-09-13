@@ -55,7 +55,7 @@ export const PWAInstallPrompt: React.FC = () => {
   return (
     <div
       style={{
-        margin: '10px 20px 0 20px',
+        margin: '10px 16px 0 16px',
         backgroundColor: '#ffffff',
         border: '1px solid #d6e6ff',
         borderRadius: '10px',

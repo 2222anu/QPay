@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CheckCircle2, ArrowRight, Smartphone, User, Store, ShieldCheck, ChevronRight } from 'lucide-react';
+import { CheckCircle2, ArrowRight, Smartphone, User, Store, ChevronRight } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { Modal } from '../components/Modal';
@@ -209,110 +209,85 @@ export const SmsOtpScreen: React.FC = () => {
         onClose={() => setIsAccountTypeModalOpen(false)}
         title="Select Account Type"
       >
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', padding: '6px 0' }}>
-          <p style={{ fontSize: '12.5px', color: '#64748b', margin: '0 0 4px 0', lineHeight: 1.4 }}>
-            Choose how you wish to operate QTPay. You can also switch modes anytime from profile settings.
-          </p>
-
-          {/* Option 1: Personal Customer */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '8px 0 16px 0' }}>
+          {/* Option 1: CUSTOMER */}
           <div
             onClick={handleSelectCustomer}
             className="interactive-tap"
             style={{
               backgroundColor: '#ffffff',
               border: '1.5px solid #e2e8f0',
-              borderRadius: '16px',
-              padding: '16px 14px',
+              borderRadius: '14px',
+              padding: '18px 16px',
+              minHeight: '60px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
               cursor: 'pointer',
-              gap: '12px',
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
               <div
                 style={{
-                  width: '44px',
-                  height: '44px',
+                  width: '42px',
+                  height: '42px',
                   borderRadius: '12px',
-                  backgroundColor: '#f8fafc',
-                  border: '1px solid #e2e8f0',
-                  color: '#0f172a',
+                  backgroundColor: '#eef5ff',
+                  border: '1px solid #d6e6ff',
+                  color: '#2e83ff',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   flexShrink: 0,
                 }}
               >
-                <User size={22} color="#0f172a" />
+                <User size={22} color="#2e83ff" />
               </div>
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <span style={{ fontSize: '15px', fontWeight: 800, color: '#0f172a' }}>
-                    Personal Customer
-                  </span>
-                </div>
-                <div style={{ fontSize: '11.5px', color: '#64748b', marginTop: '2px', lineHeight: 1.3 }}>
-                  Pay via UPI QR, send money, recharge bills, and view personal spent analysis
-                </div>
-              </div>
+              <span style={{ fontSize: '16px', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.01em' }}>
+                CUSTOMER
+              </span>
             </div>
-            <ChevronRight size={18} color="#94a3b8" style={{ flexShrink: 0 }} />
+            <ChevronRight size={20} color="#94a3b8" style={{ flexShrink: 0 }} />
           </div>
 
-          {/* Option 2: Merchant Business */}
+          {/* Option 2: MERCHANT */}
           <div
             onClick={handleSelectMerchant}
             className="interactive-tap"
             style={{
-              backgroundColor: '#f0f7ff',
-              border: '1.5px solid #2e83ff',
-              borderRadius: '16px',
-              padding: '16px 14px',
+              backgroundColor: '#ffffff',
+              border: '1.5px solid #e2e8f0',
+              borderRadius: '14px',
+              padding: '18px 16px',
+              minHeight: '60px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
               cursor: 'pointer',
-              gap: '12px',
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
               <div
                 style={{
-                  width: '44px',
-                  height: '44px',
+                  width: '42px',
+                  height: '42px',
                   borderRadius: '12px',
-                  backgroundColor: '#2e83ff',
-                  color: '#ffffff',
+                  backgroundColor: '#eef5ff',
+                  border: '1px solid #d6e6ff',
+                  color: '#2e83ff',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   flexShrink: 0,
                 }}
               >
-                <Store size={22} color="#ffffff" />
+                <Store size={22} color="#2e83ff" />
               </div>
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <span style={{ fontSize: '15px', fontWeight: 800, color: '#0f172a' }}>
-                    Merchant Business
-                  </span>
-                  <span style={{ fontSize: '10px', fontWeight: 800, color: '#2e83ff', backgroundColor: '#eef5ff', border: '1px solid #d6e6ff', padding: '1px 6px', borderRadius: '8px' }}>
-                    SoftPOS Tap
-                  </span>
-                </div>
-                <div style={{ fontSize: '11.5px', color: '#475569', marginTop: '2px', lineHeight: 1.3 }}>
-                  Collect card taps (mada/Visa/MC), countertop QR, real-time sales &amp; instant bank settlement
-                </div>
-              </div>
+              <span style={{ fontSize: '16px', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.01em' }}>
+                MERCHANT
+              </span>
             </div>
-            <ChevronRight size={18} color="#2e83ff" style={{ flexShrink: 0 }} />
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', marginTop: '4px', fontSize: '11px', color: '#64748b', fontWeight: 600 }}>
-            <ShieldCheck size={13} color="#2e83ff" />
-            <span>SAMA &amp; Saudi Payments Regulated Boundary</span>
+            <ChevronRight size={20} color="#94a3b8" style={{ flexShrink: 0 }} />
           </div>
         </div>
       </Modal>
