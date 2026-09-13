@@ -48,8 +48,8 @@ export const SoftPosScreen: React.FC = () => {
   const handleSimulateTap = async () => {
     setTxnState('CARD_DETECTED');
 
-    // If above ₹5,000, PIN is required on glass
-    if (numAmount > 5000) {
+    // If above SAR 500, PIN is required on glass
+    if (numAmount > 500) {
       setTimeout(() => {
         setTxnState('PIN_REQUIRED');
       }, 700);
@@ -165,7 +165,7 @@ export const SoftPosScreen: React.FC = () => {
                   marginTop: '10px',
                 }}
               >
-                <span style={{ fontSize: '32px', fontWeight: 800, color: '#2e83ff' }}>₹</span>
+                <span style={{ fontSize: '32px', fontWeight: 800, color: '#2e83ff' }}>SAR</span>
                 <input
                   type="number"
                   value={amountStr}
@@ -189,7 +189,7 @@ export const SoftPosScreen: React.FC = () => {
 
             {/* Quick Presets */}
             <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'center' }}>
-              {['100', '250', '500', '1200', '6000'].map((val) => (
+              {['50', '100', '250', '500', '1200'].map((val) => (
                 <button
                   key={val}
                   type="button"
@@ -206,7 +206,7 @@ export const SoftPosScreen: React.FC = () => {
                     cursor: 'pointer',
                   }}
                 >
-                  ₹{val}
+                  SAR {val}
                 </button>
               ))}
             </div>
@@ -291,7 +291,7 @@ export const SoftPosScreen: React.FC = () => {
           </div>
         )}
 
-        {/* State 3: PIN_REQUIRED (for amounts > ₹5,000) */}
+        {/* State 3: PIN_REQUIRED (for amounts > SAR 500) */}
         {txnState === 'PIN_REQUIRED' && (
           <div
             className="fade-in"
@@ -326,7 +326,7 @@ export const SoftPosScreen: React.FC = () => {
               PIN Required on Glass
             </h3>
             <p style={{ fontSize: '12.5px', color: '#64748b', marginBottom: '20px' }}>
-              Amount ({formatCurrency(numAmount)}) exceeds the ₹5,000 contactless limit without PIN.
+              Amount ({formatCurrency(numAmount)}) exceeds the SAR 500 contactless limit without PIN.
             </p>
 
             <PrimaryButton onClick={proceedAuthorization}>

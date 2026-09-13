@@ -27,33 +27,33 @@ export const ShoppingScreen: React.FC = () => {
   const deals: DealItem[] = [
     {
       id: 'deal-1',
-      merchant: 'Star Supermarket',
+      merchant: 'Tamimi Markets',
       title: 'Weekly Grocery Smart Saver',
-      offer: 'Flat ₹300 Cashback on UPI',
+      offer: 'Flat SAR 30 Cashback on UPI',
       category: 'Groceries & Essentials',
-      couponCode: 'STARSAVER300',
-      originalPrice: 2500,
-      discountedPrice: 2200,
+      couponCode: 'TAMIMI30',
+      originalPrice: 250,
+      discountedPrice: 220,
     },
     {
       id: 'deal-2',
       merchant: 'Fashion Hub Outlet',
       title: 'Trending Apparel Collection',
-      offer: 'Flat ₹500 Instant OFF',
+      offer: 'Flat SAR 50 Instant OFF',
       category: 'Clothing & Accessories',
-      couponCode: 'FASHION500',
-      originalPrice: 2499,
-      discountedPrice: 1999,
+      couponCode: 'FASHION50',
+      originalPrice: 249,
+      discountedPrice: 199,
     },
     {
       id: 'deal-3',
       merchant: 'Tech Zone Electronics',
       title: 'Wireless Noise Cancelling Earbuds',
-      offer: 'Up to ₹1,500 Instant Discount',
+      offer: 'Up to SAR 150 Instant Discount',
       category: 'Gadgets & Electronics',
-      couponCode: 'TECHZONE1500',
-      originalPrice: 4999,
-      discountedPrice: 3499,
+      couponCode: 'TECHZONE150',
+      originalPrice: 499,
+      discountedPrice: 349,
     },
   ];
 
@@ -68,7 +68,7 @@ export const ShoppingScreen: React.FC = () => {
 
     openPinModal({
       title: `Buy ${selectedDeal.title}`,
-      subTitle: `${selectedDeal.merchant} • ₹${selectedDeal.discountedPrice}`,
+      subTitle: `${selectedDeal.merchant} • SAR ${selectedDeal.discountedPrice}`,
       amount: selectedDeal.discountedPrice,
       onSuccess: async () => {
         await completePayment({
@@ -284,10 +284,10 @@ export const ShoppingScreen: React.FC = () => {
                 <span style={{ fontSize: '13px', fontWeight: '700', color: '#64748b' }}>Special Discount Price</span>
                 <div>
                   <span style={{ fontSize: '13px', color: '#9CA3AF', textDecoration: 'line-through', marginRight: '8px', fontVariantNumeric: 'tabular-nums' }}>
-                    ₹{selectedDeal.originalPrice.toLocaleString()}
+                    SAR {selectedDeal.originalPrice.toLocaleString()}
                   </span>
                   <span style={{ fontSize: '20px', fontWeight: '800', color: '#0f172a', fontVariantNumeric: 'tabular-nums' }}>
-                    ₹{selectedDeal.discountedPrice.toLocaleString()}
+                    SAR {selectedDeal.discountedPrice.toLocaleString()}
                   </span>
                 </div>
               </div>
@@ -308,7 +308,7 @@ export const ShoppingScreen: React.FC = () => {
                 cursor: 'pointer',
               }}
             >
-              Order Now via QPay UPI PIN (₹{selectedDeal.discountedPrice.toLocaleString()})
+              Order Now via QPay UPI PIN (SAR {selectedDeal.discountedPrice.toLocaleString()})
             </button>
           </div>
         </div>
@@ -370,7 +370,7 @@ export const ShoppingScreen: React.FC = () => {
             <div style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '16px', textAlign: 'left', marginBottom: '20px' }}>
               <div style={{ fontSize: '14px', fontWeight: '800', color: '#0f172a' }}>{purchasedDeal.title}</div>
               <div style={{ fontSize: '13px', fontWeight: '800', color: '#2e83ff', marginTop: '6px', fontVariantNumeric: 'tabular-nums' }}>
-                Paid ₹{purchasedDeal.paidAmount.toLocaleString()} via UPI
+                Paid SAR {purchasedDeal.paidAmount.toLocaleString()} via UPI
               </div>
             </div>
 

@@ -476,7 +476,7 @@ export const ScanScreen: React.FC = () => {
               Possible Duplicate Payment
             </h3>
             <p style={{ fontSize: '13px', color: '#cbd5e1', marginBottom: '20px', lineHeight: '1.4' }}>
-              You recently paid ₹{duplicateWarning.amount} to {duplicateWarning.payee} less than a minute ago. Do you wish to proceed again?
+              You recently paid SAR {duplicateWarning.amount} to {duplicateWarning.payee} less than a minute ago. Do you wish to proceed again?
             </p>
             <div style={{ display: 'flex', gap: '10px', width: '100%', maxWidth: '280px' }}>
               <button
@@ -618,7 +618,7 @@ export const ScanScreen: React.FC = () => {
           <button
             onClick={() =>
               handleScanSuccess(
-                { id: 'm-1', name: 'Star Supermarket', upiId: 'star@hdfc', avatarInitials: 'SS', isMerchant: true },
+                { id: 'm-1', name: 'Tamimi Markets', upiId: 'tamimi@alrajhi', avatarInitials: 'TM', isMerchant: true },
                 280
               )
             }
@@ -637,14 +637,14 @@ export const ScanScreen: React.FC = () => {
               whiteSpace: 'nowrap',
             }}
           >
-            <Store size={13} color={designSystem.colors.primary} /> P2M Store (₹280)
+            <Store size={13} color={designSystem.colors.primary} /> P2M Store (SAR 280)
           </button>
 
           {/* P2P Person Static QR */}
           <button
             onClick={() =>
               handleScanSuccess(
-                { id: 'p2p-1', name: 'Rahul Sharma', upiId: 'rahul@upi', avatarInitials: 'RS', isMerchant: false }
+                { id: 'p2p-1', name: 'Tariq Al-Mansoor', upiId: 'tariq@snb', avatarInitials: 'TM', isMerchant: false }
               )
             }
             style={{

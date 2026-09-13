@@ -1,10 +1,9 @@
 export const formatCurrency = (amount: number): string => {
-  return new Intl.NumberFormat('en-IN', {
-    style: 'currency',
-    currency: 'INR',
-    maximumFractionDigits: 2,
+  const num = typeof amount === 'number' && !isNaN(amount) ? amount : 0;
+  return `SAR ${num.toLocaleString('en-US', {
     minimumFractionDigits: 2,
-  }).format(amount);
+    maximumFractionDigits: 2,
+  })}`;
 };
 
 export const generateUTR = (): string => {

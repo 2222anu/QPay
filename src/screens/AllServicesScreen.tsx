@@ -190,17 +190,17 @@ export const AllServicesScreen: React.FC = () => {
               <ServiceCard
                 label="Insurance"
                 icon={<ShieldCheck size={20} />}
-                onClick={() => handleOpenService('Insurance Premium', 'LIC / HDFC Life Insurance', 3450, 'Enter Policy Number', <ShieldCheck size={20} />)}
+                onClick={() => handleOpenService('Insurance Premium', 'Tawuniya / Bupa Arabia Insurance', 3450, 'Enter Policy Number', <ShieldCheck size={20} />)}
               />
               <ServiceCard
                 label="Loan Repay"
                 icon={<Building size={20} />}
-                onClick={() => handleOpenService('Loan EMI Repayment', 'Bajaj Finance / HDFC Bank', 4200, 'Enter Loan Account Number', <Building size={20} />)}
+                onClick={() => handleOpenService('Loan EMI Repayment', 'Al Rajhi / SNB Finance EMI', 4200, 'Enter Loan Account Number', <Building size={20} />)}
               />
               <ServiceCard
-                label="FASTag"
+                label="Road Tolls"
                 icon={<Car size={20} />}
-                onClick={() => handleOpenService('FASTag Recharge', 'NETC FASTag ICICI / Paytm', 500, 'Enter Vehicle VRN / VRM Number', <Car size={20} />)}
+                onClick={() => handleOpenService('Parking & Road Tolls', 'Mawaqif / Regional Toll Tag', 150, 'Enter Vehicle Plate Number', <Car size={20} />)}
               />
             </div>
           </div>
@@ -289,7 +289,7 @@ export const AllServicesScreen: React.FC = () => {
 
             <div style={{ marginBottom: '24px' }}>
               <label htmlFor="modal-amt-input" style={{ fontSize: '11px', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '6px', display: 'block' }}>
-                Payment Amount (₹)
+                Payment Amount (SAR)
               </label>
               <input
                 id="modal-amt-input"

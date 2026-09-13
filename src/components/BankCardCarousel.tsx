@@ -10,39 +10,46 @@ interface BankCardCarouselProps {
 
 const getBankStyle = (bankName: string) => {
   const nameUpper = bankName.toUpperCase();
+  if (nameUpper.includes('RAJHI')) {
+    return {
+      gradient: 'linear-gradient(135deg, #071b3e 0%, #0d367e 50%, #1e5fc2 100%)',
+      tagText: 'AL RAJHI BANK',
+      shortName: 'AL RAJHI',
+    };
+  }
+  if (nameUpper.includes('SNB') || nameUpper.includes('NATIONAL BANK') || nameUpper.includes('AHLI')) {
+    return {
+      gradient: 'linear-gradient(135deg, #052617 0%, #0c4a2e 50%, #107c41 100%)',
+      tagText: 'SAUDI NATIONAL BANK',
+      shortName: 'SNB',
+    };
+  }
+  if (nameUpper.includes('RIYAD')) {
+    return {
+      gradient: 'linear-gradient(135deg, #2a0b16 0%, #58162b 50%, #9f1239 100%)',
+      tagText: 'RIYAD BANK',
+      shortName: 'RIYAD',
+    };
+  }
+  if (nameUpper.includes('INMA')) {
+    return {
+      gradient: 'linear-gradient(135deg, #231608 0%, #52340f 50%, #a16207 100%)',
+      tagText: 'ALINMA BANK',
+      shortName: 'ALINMA',
+    };
+  }
+  if (nameUpper.includes('SAB') || nameUpper.includes('AWWAL')) {
+    return {
+      gradient: 'linear-gradient(135deg, #320a10 0%, #6e101f 50%, #b91c1c 100%)',
+      tagText: 'SAB BANK',
+      shortName: 'SAB',
+    };
+  }
   if (nameUpper.includes('HDFC')) {
     return {
       gradient: 'linear-gradient(135deg, #001f3f 0%, #003366 50%, #0284c7 100%)',
       tagText: 'HDFC BANK',
       shortName: 'HDFC',
-    };
-  }
-  if (nameUpper.includes('STATE') || nameUpper.includes('SBI')) {
-    return {
-      gradient: 'linear-gradient(135deg, #072a40 0%, #0369a1 50%, #0284c7 100%)',
-      tagText: 'STATE BANK OF INDIA',
-      shortName: 'SBI',
-    };
-  }
-  if (nameUpper.includes('ICICI')) {
-    return {
-      gradient: 'linear-gradient(135deg, #0a2540 0%, #153e75 50%, #1a56db 100%)',
-      tagText: 'ICICI BANK',
-      shortName: 'ICICI',
-    };
-  }
-  if (nameUpper.includes('AXIS')) {
-    return {
-      gradient: 'linear-gradient(135deg, #2b0914 0%, #4a0e20 50%, #831843 100%)',
-      tagText: 'AXIS BANK',
-      shortName: 'AXIS',
-    };
-  }
-  if (nameUpper.includes('YES')) {
-    return {
-      gradient: 'linear-gradient(135deg, #0b192c 0%, #172554 50%, #1d4ed8 100%)',
-      tagText: 'YES BANK',
-      shortName: 'YES',
     };
   }
   return {
@@ -297,7 +304,7 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
                     Available Balance
                   </div>
                   <div style={{ fontSize: '18px', fontWeight: 900, color: '#ffffff', marginTop: '2px', letterSpacing: '0.01em' }}>
-                    {bank.showBalance ? formatCurrency(bank.balance) : '₹ ••••••••'}
+                    {bank.showBalance ? formatCurrency(bank.balance) : 'SAR ••••••••'}
                   </div>
                 </div>
 

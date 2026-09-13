@@ -19,8 +19,8 @@ export const RewardsScreen: React.FC = () => {
     {
       id: 'sc-1',
       title: 'UPI Transfer Reward',
-      subtitle: 'Earned on ₹2,620 Electricity Payment',
-      rewardText: '₹150 Instant Cashback',
+      subtitle: 'Earned on SAR 2,620 SEC Electricity Payment',
+      rewardText: 'SAR 150 Instant Cashback',
       rewardType: 'cashback',
       amount: 150,
       isScratched: false,
@@ -28,7 +28,7 @@ export const RewardsScreen: React.FC = () => {
     {
       id: 'sc-2',
       title: 'Merchant Super Saver',
-      subtitle: 'Earned at Star Supermarket',
+      subtitle: 'Earned at Tamimi Markets',
       rewardText: 'Flat 25% Off Food & Groceries',
       rewardType: 'voucher',
       code: 'QTPAYFOOD25',
@@ -47,7 +47,7 @@ export const RewardsScreen: React.FC = () => {
       id: 'sc-4',
       title: 'Travel Special Voucher',
       subtitle: 'Flight booking discount card',
-      rewardText: 'Flat ₹750 Flight Discount',
+      rewardText: 'Flat SAR 150 Flight Discount',
       rewardType: 'voucher',
       code: 'FLYQTPAY750',
       isScratched: true,
@@ -123,7 +123,7 @@ export const RewardsScreen: React.FC = () => {
             {points.toLocaleString()} QTPoints
           </h2>
           <p style={{ fontSize: '12px', color: '#94a3b8', margin: 0 }}>
-            Earn 10 QTPoints on every ₹100 spent via QPay UPI
+            Earn 10 QTPoints on every SAR 100 spent via QPay UPI
           </p>
         </div>
 

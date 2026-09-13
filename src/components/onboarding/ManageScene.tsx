@@ -100,8 +100,8 @@ export const ManageScene: React.FC = () => {
             boxShadow: '0 8px 20px rgba(10, 25, 47, 0.2)',
           }}
         >
-          <span>SBI GLOBAL &bull; •••• 5590</span>
-          <span>₹12,450</span>
+          <span>RIYAD BANK &bull; •••• 5590</span>
+          <span>SAR 12,450</span>
         </div>
 
         {/* Card 2: Electric Blue Card Layered */}
@@ -125,8 +125,8 @@ export const ManageScene: React.FC = () => {
             boxShadow: '0 12px 28px rgba(29, 78, 216, 0.25)',
           }}
         >
-          <span style={{ fontSize: '11px', fontWeight: 800 }}>ICICI SAPPHIRE &bull; •••• 3616</span>
-          <span style={{ fontSize: '11px', fontWeight: 800, color: '#38bdf8' }}>₹18,450</span>
+          <span style={{ fontSize: '11px', fontWeight: 800 }}>SNB PLATINUM &bull; •••• 3616</span>
+          <span style={{ fontSize: '11px', fontWeight: 800, color: '#38bdf8' }}>SAR 18,450</span>
         </div>
 
         {/* Card 1: Primary HDFC Platinum Card (Foreground) */}
@@ -153,7 +153,7 @@ export const ManageScene: React.FC = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
               <Landmark size={14} color="#38bdf8" />
-              <span style={{ fontSize: '11px', fontWeight: 900, letterSpacing: '0.04em' }}>HDFC PLATINUM</span>
+              <span style={{ fontSize: '11px', fontWeight: 900, letterSpacing: '0.04em' }}>AL RAJHI INFINITE</span>
             </div>
             <Wifi size={13} color="#93c5fd" />
           </div>
@@ -168,7 +168,7 @@ export const ManageScene: React.FC = () => {
               </div>
             </div>
             <div style={{ fontSize: '15px', fontWeight: 900, color: '#ffffff' }}>
-              ₹45,280
+              SAR 45,280
             </div>
           </div>
         </div>
@@ -215,7 +215,7 @@ export const ManageScene: React.FC = () => {
           Total Financial Balance
         </div>
         <div className="tabular-nums" style={{ fontSize: '24px', fontWeight: 900, color: '#0f172a', margin: '2px 0 6px 0', letterSpacing: '0.01em' }}>
-          ₹ 63,730.00
+          SAR 63,730.00
         </div>
 
         {/* Floating Streams Indicators */}

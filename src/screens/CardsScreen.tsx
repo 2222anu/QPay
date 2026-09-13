@@ -398,12 +398,12 @@ export const CardsScreen: React.FC = () => {
                   <CreditCard size={16} />
                 </div>
                 <div>
-                  <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#0f172a' }}>Amazon India</div>
+                  <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#0f172a' }}>Amazon KSA</div>
                   <div style={{ fontSize: '11px', color: '#64748b' }}>E-Commerce Purchase &bull; Today</div>
                 </div>
               </div>
               <div className="tabular-nums" style={{ fontSize: '14px', fontWeight: 800, color: '#0f172a' }}>
-                -₹2,499.00
+                -SAR 2,499.00
               </div>
             </div>
 
@@ -426,12 +426,12 @@ export const CardsScreen: React.FC = () => {
                   <Wifi size={16} />
                 </div>
                 <div>
-                  <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#0f172a' }}>Metro Station Tap</div>
+                  <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#0f172a' }}>Riyadh Metro Tap</div>
                   <div style={{ fontSize: '11px', color: '#64748b' }}>Contactless POS &bull; Yesterday</div>
                 </div>
               </div>
               <div className="tabular-nums" style={{ fontSize: '14px', fontWeight: 800, color: '#0f172a' }}>
-                -₹45.00
+                -SAR 45.00
               </div>
             </div>
           </div>
@@ -515,7 +515,7 @@ export const CardsScreen: React.FC = () => {
             >
               <option value="Damaged / Worn Out">Damaged / Worn Out</option>
               <option value="Suspected Fraud / Compromised">Suspected Fraud / Compromised</option>
-              <option value="Upgrade to RuPay Platinum">Upgrade to RuPay Platinum</option>
+              <option value="Upgrade to mada Platinum">Upgrade to mada Platinum</option>
             </select>
           </div>
 

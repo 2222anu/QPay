@@ -4,7 +4,7 @@ const INITIAL_NOTIFICATIONS: AppNotification[] = [
   {
     id: 'notif-1',
     title: 'Payment successful',
-    description: '₹2,620.14 paid to State Power Corporation',
+    description: 'SAR 1,420.50 paid to Saudi Electricity Company',
     timestamp: 'Just now',
     read: false,
     type: 'success',
@@ -12,7 +12,7 @@ const INITIAL_NOTIFICATIONS: AppNotification[] = [
   {
     id: 'notif-2',
     title: 'Payment successful',
-    description: '₹450.00 paid to Omar Khalid',
+    description: 'SAR 450.00 paid to Omar Khalid',
     timestamp: '2 hours ago',
     read: true,
     type: 'success',
@@ -20,7 +20,7 @@ const INITIAL_NOTIFICATIONS: AppNotification[] = [
   {
     id: 'notif-3',
     title: 'Bank linked',
-    description: 'ICICI Bank was linked successfully.',
+    description: 'Al Rajhi Bank was linked successfully.',
     timestamp: '1 day ago',
     read: true,
     type: 'info',
@@ -28,7 +28,7 @@ const INITIAL_NOTIFICATIONS: AppNotification[] = [
   {
     id: 'notif-4',
     title: 'Bank linked',
-    description: 'Yes Bank was linked successfully.',
+    description: 'Saudi National Bank (SNB) was linked successfully.',
     timestamp: '2 days ago',
     read: true,
     type: 'info',

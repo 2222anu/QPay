@@ -11,7 +11,7 @@ export const RequestMoneyScreen: React.FC = () => {
     name: 'Priya Menon',
     upiId: 'priya@paytm',
     avatarInitials: 'PM',
-    mobile: '+91 98765 00001',
+    mobile: '+966 50 123 0001',
   });
   const [amountStr, setAmountStr] = useState<string>('');
   const [note, setNote] = useState<string>('');
@@ -59,7 +59,7 @@ export const RequestMoneyScreen: React.FC = () => {
               Request Sent Successfully!
             </h3>
             <p style={{ color: '#64748b', fontSize: '13px', margin: 0 }}>
-              Requested ₹{amountStr} from <strong style={{ color: '#0f172a' }}>{selectedContact.name}</strong>
+              Requested SAR {amountStr} from <strong style={{ color: '#0f172a' }}>{selectedContact.name}</strong>
             </p>
           </div>
         ) : (
@@ -156,7 +156,7 @@ export const RequestMoneyScreen: React.FC = () => {
                   marginBottom: '14px',
                 }}
               >
-                <span style={{ fontSize: '26px', fontWeight: 800, color: '#2e83ff', marginRight: '8px' }}>₹</span>
+                <span style={{ fontSize: '20px', fontWeight: 800, color: '#2e83ff', marginRight: '8px' }}>SAR</span>
                 <input
                   type="number"
                   value={amountStr}
@@ -199,7 +199,7 @@ export const RequestMoneyScreen: React.FC = () => {
                       whiteSpace: 'nowrap',
                     }}
                   >
-                    +₹{quickAmt}
+                    +{quickAmt} SAR
                   </button>
                 ))}
               </div>

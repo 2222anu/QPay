@@ -287,7 +287,7 @@ export const BankAccountsScreen: React.FC = () => {
                         Available Balance
                       </div>
                       <div className="tabular-nums" style={{ fontSize: '19px', fontWeight: 900, color: '#ffffff', marginTop: '2px', letterSpacing: '0.02em' }}>
-                        {bank.showBalance ? formatCurrency(bank.balance) : '₹ ••••••••'}
+                        {bank.showBalance ? formatCurrency(bank.balance) : 'SAR ••••••••'}
                       </div>
                     </div>
 
@@ -428,7 +428,7 @@ export const BankAccountsScreen: React.FC = () => {
                       Available Balance
                     </div>
                     <div className="tabular-nums" style={{ fontSize: '18px', fontWeight: 900, color: '#0f172a', marginTop: '2px', letterSpacing: '0.01em' }}>
-                      {bank.showBalance ? formatCurrency(bank.balance) : '₹ ••••••••'}
+                      {bank.showBalance ? formatCurrency(bank.balance) : 'SAR ••••••••'}
                     </div>
                   </div>
 

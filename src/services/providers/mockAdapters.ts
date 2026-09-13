@@ -51,7 +51,7 @@ export class MockPaymentProvider implements IPaymentProvider {
       subTitle: params.subTitle || 'Instant UPI Transfer',
       amount: params.amount,
       fee: 0,
-      currency: 'INR',
+      currency: 'SAR',
       status: 'SUCCESS',
       timestamp: new Date(),
       dateStr: 'TODAY',
@@ -73,12 +73,12 @@ export class MockPaymentProvider implements IPaymentProvider {
       subTitle: 'UPI Bank Transfer',
       amount: 100,
       fee: 0,
-      currency: 'INR',
+      currency: 'SAR',
       status: 'SUCCESS',
       timestamp: new Date(),
       dateStr: 'TODAY',
       payeeName: 'Verified Payee',
-      payerAccount: 'ICICI Bank Savings **** 3616',
+      payerAccount: 'Al Rajhi Bank Savings **** 3616',
     };
   }
 }
@@ -187,7 +187,7 @@ export class MockQRProvider implements IQRProvider {
     note?: string;
     invoiceRef?: string;
   }): Promise<string> {
-    let url = `upi://pay?pa=${encodeURIComponent(params.upiId)}&pn=${encodeURIComponent(params.name)}&cu=INR`;
+    let url = `upi://pay?pa=${encodeURIComponent(params.upiId)}&pn=${encodeURIComponent(params.name)}&cu=SAR`;
     if (params.amount && params.amount > 0) {
       url += `&am=${params.amount}`;
     }
@@ -395,7 +395,7 @@ export class MockBillerProvider implements IBillerProvider {
       subTitle: `Consumer: ${params.consumerNumber}`,
       amount: params.amount,
       fee: 0,
-      currency: 'INR',
+      currency: 'SAR',
       status: 'SUCCESS',
       timestamp: new Date(),
       dateStr: 'TODAY',
@@ -630,15 +630,15 @@ export class MockSoundBoxProvider implements ISoundBoxProvider {
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
       try {
         const amtFormatted = Math.round(amount);
-        let speechText = `QTPay received ${amtFormatted} rupees.`;
-        let langCode = 'en-IN';
+        let speechText = `QTPay received ${amtFormatted} Saudi Riyals.`;
+        let langCode = 'en-US';
 
-        if (language === 'Hindi') {
-          speechText = `QTPay par ${amtFormatted} rupaye prapt hue.`;
+        if (language === 'Arabic' || language === 'العربية') {
+          speechText = `تم استلام ${amtFormatted} ريال عبر كيو تي باي.`;
+          langCode = 'ar-SA';
+        } else if (language === 'Hindi') {
+          speechText = `QTPay par ${amtFormatted} riyal prapt hue.`;
           langCode = 'hi-IN';
-        } else if (language === 'Tamil') {
-          speechText = `QTPay il ${amtFormatted} roobai pera-pattadhu.`;
-          langCode = 'ta-IN';
         }
 
         const utterance = new SpeechSynthesisUtterance(speechText);

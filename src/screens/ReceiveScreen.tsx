@@ -29,7 +29,7 @@ export const ReceiveScreen: React.FC = () => {
         .share({
           title: 'QTPay UPI ID',
           text: numAmount
-            ? `Pay ${user.name} ₹${numAmount} via QTPay: ${user.upiId}`
+            ? `Pay ${user.name} SAR ${numAmount} via QTPay: ${user.upiId}`
             : `Pay ${user.name} via QTPay: ${user.upiId}`,
         })
         .catch(() => {});
@@ -128,7 +128,7 @@ export const ReceiveScreen: React.FC = () => {
                 borderRadius: '12px',
               }}
             >
-              Requesting: ₹{numAmount.toLocaleString('en-IN')}
+              Requesting: SAR {numAmount.toLocaleString('en-US')}
             </div>
           )}
 
@@ -186,7 +186,7 @@ export const ReceiveScreen: React.FC = () => {
                 </div>
                 <input
                   type="number"
-                  placeholder="Enter amount (₹)"
+                  placeholder="Enter amount (SAR)"
                   value={customAmount}
                   onChange={(e) => setCustomAmount(e.target.value)}
                   className="tabular-nums"

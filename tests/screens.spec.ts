@@ -200,7 +200,7 @@ test.describe('QtPay All Screens and Modals Verification Suite', () => {
 
     await expect(page.locator('text=QTPay Smart Sound Box Pro')).toBeVisible();
     await expect(page.locator('button:has-text("Play Audio Chime")')).toBeVisible();
-    await expect(page.locator('button:has-text("Test ₹500")')).toBeVisible();
+    await expect(page.locator('button:has-text("Test SAR 500")')).toBeVisible();
     expect(consoleErrors).toEqual([]);
   });
 

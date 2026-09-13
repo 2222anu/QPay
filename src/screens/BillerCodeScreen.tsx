@@ -465,7 +465,7 @@ export const BillerCodeScreen: React.FC = () => {
                     display: 'block',
                   }}
                 >
-                  Custom Payment Amount (₹)
+                  Custom Payment Amount (SAR)
                 </label>
                 <input
                   id="partial-amt-input"

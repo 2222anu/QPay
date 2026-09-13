@@ -6,7 +6,7 @@ const qrProvider = new MockQRProvider();
 
 export const qrService = {
   getUpiQrString(upiId: string, name: string, amount?: number, note?: string): string {
-    let url = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(name)}&cu=INR`;
+    let url = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(name)}&cu=SAR`;
     if (amount && amount > 0) {
       url += `&am=${amount}`;
     }

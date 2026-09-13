@@ -252,7 +252,7 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen: prop
               {name || 'Your Name'}
             </div>
             <div style={{ fontSize: '12px', color: designSystem.colors.primary, fontWeight: designSystem.typography.weights.bold, marginTop: '2px' }}>
-              {upiId || 'upi@qtpay'} &bull; {mobile || '+91...'}
+              {upiId || 'upi@qtpay'} &bull; {mobile || '+966...'}
             </div>
           </div>
         </div>

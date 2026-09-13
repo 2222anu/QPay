@@ -44,7 +44,7 @@ export const SoundBoxScreen: React.FC = () => {
     setDevice(updated);
   };
 
-  const handleLanguageChange = async (lang: 'English' | 'Hindi' | 'Tamil' | 'Telugu' | 'Marathi') => {
+  const handleLanguageChange = async (lang: 'Arabic' | 'English' | 'Hindi' | 'Tamil' | 'Telugu' | 'Marathi') => {
     const updated = await soundBoxService.updateSettings({ language: lang });
     setDevice(updated);
   };
@@ -56,10 +56,10 @@ export const SoundBoxScreen: React.FC = () => {
   };
 
   const handleSimulatePayment = async (amount: number) => {
-    setLastAnnouncement(`Announcing ₹${amount} in ${device.language}...`);
+    setLastAnnouncement(`Announcing SAR ${amount} in ${device.language}...`);
     await soundBoxService.announcePayment(amount, device.language);
     setTimeout(() => {
-      setLastAnnouncement(`Announced: "${device.language === 'Hindi' ? `QTPay par ${amount} rupaye prapt hue` : `QTPay received ${amount} rupees`}"`);
+      setLastAnnouncement(`Announced: "${device.language === 'Arabic' ? `تم استلام ${amount} ريال عبر كيو تي باي` : `QTPay received ${amount} SAR`}"`);
     }, 400);
   };
 
@@ -234,7 +234,7 @@ export const SoundBoxScreen: React.FC = () => {
             </div>
 
             <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-              {(['Hindi', 'English', 'Tamil', 'Telugu', 'Marathi'] as const).map((lang) => (
+              {(['Arabic', 'English', 'Hindi', 'Tamil', 'Telugu', 'Marathi'] as const).map((lang) => (
                 <button
                   key={lang}
                   type="button"
@@ -294,7 +294,7 @@ export const SoundBoxScreen: React.FC = () => {
                 cursor: 'pointer',
               }}
             >
-              Test ₹100
+              Test SAR 100
             </button>
             <button
               onClick={() => handleSimulatePayment(500)}
@@ -310,7 +310,7 @@ export const SoundBoxScreen: React.FC = () => {
                 cursor: 'pointer',
               }}
             >
-              Test ₹500
+              Test SAR 500
             </button>
             <button
               onClick={() => handleSimulatePayment(1200)}
@@ -326,7 +326,7 @@ export const SoundBoxScreen: React.FC = () => {
                 cursor: 'pointer',
               }}
             >
-              Test ₹1,200
+              Test SAR 1,200
             </button>
           </div>
 

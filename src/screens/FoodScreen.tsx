@@ -49,7 +49,7 @@ export const FoodScreen: React.FC = () => {
       name: 'Royal Biryani House',
       rating: '4.9',
       cuisine: 'Hyderabadi Dum Biryani & Kebabs',
-      offer: 'Free Chicken Tikka Starter on orders > ₹500',
+      offer: 'Free Chicken Tikka Starter on orders > SAR 100',
       deliveryTime: '30-35 mins',
       items: [
         { id: 'i-4', name: 'Special Mutton Dum Biryani', price: 420, qty: 1 },
@@ -284,7 +284,7 @@ export const FoodScreen: React.FC = () => {
                   <div>
                     <div style={{ fontSize: '14px', fontWeight: '800', color: '#0f172a' }}>{item.name}</div>
                     <div style={{ fontSize: '13px', fontWeight: '700', color: '#2e83ff', marginTop: '2px', fontVariantNumeric: 'tabular-nums' }}>
-                      ₹{item.price}
+                      SAR {item.price}
                     </div>
                   </div>
 
@@ -336,7 +336,7 @@ export const FoodScreen: React.FC = () => {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px', paddingTop: '12px', borderTop: '1px dashed #cbd5e1' }}>
               <span style={{ fontSize: '13px', fontWeight: '700', color: '#64748b' }}>Total Bill Amount</span>
               <span style={{ fontSize: '20px', fontWeight: '900', color: '#2e83ff', fontVariantNumeric: 'tabular-nums' }}>
-                ₹{calculateSubtotal().toLocaleString()}
+                SAR {calculateSubtotal().toLocaleString()}
               </span>
             </div>
 
@@ -356,7 +356,7 @@ export const FoodScreen: React.FC = () => {
                 cursor: calculateSubtotal() > 0 ? 'pointer' : 'not-allowed',
               }}
             >
-              Order & Pay ₹{calculateSubtotal().toLocaleString()} via UPI PIN
+              Order & Pay SAR {calculateSubtotal().toLocaleString()} via UPI PIN
             </button>
           </div>
         </div>
@@ -423,7 +423,7 @@ export const FoodScreen: React.FC = () => {
                 </span>
               </div>
               <div style={{ fontSize: '13px', fontWeight: '700', color: '#0f172a' }}>
-                Paid ₹{orderConfirmed.totalAmount} via QPay UPI
+                Paid SAR {orderConfirmed.totalAmount} via QPay UPI
               </div>
             </div>
 

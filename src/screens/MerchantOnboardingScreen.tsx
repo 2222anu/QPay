@@ -20,17 +20,17 @@ export const MerchantOnboardingScreen: React.FC = () => {
 
   // Form State
   const [tradeName, setTradeName] = useState('Anu Super Retail');
-  const [legalName, setLegalName] = useState('Anu Retail Enterprises Pvt Ltd');
-  const [businessPan, setBusinessPan] = useState('AAACA1234F');
-  const [gstin, setGstin] = useState('27AAACA1234F1Z5');
+  const [legalName, setLegalName] = useState('Anu Trading & Retail LLC');
+  const [crNumber, setCrNumber] = useState('1010892412');
+  const [vatNumber, setVatNumber] = useState('310294819200003');
   const [category, setCategory] = useState('Grocery & Supermarket');
 
-  const [storeAddress, setStoreAddress] = useState('Shop 4, Phoenix Marketcity, Kurla West');
-  const [city, setCity] = useState('Mumbai');
-  const [pincode, setPincode] = useState('400070');
+  const [storeAddress, setStoreAddress] = useState('King Fahd Road, Al Olaya District');
+  const [city, setCity] = useState('Riyadh');
+  const [pincode, setPincode] = useState('12214');
 
-  const [bankAccount, setBankAccount] = useState('50100234891234');
-  const [ifsc, setIfsc] = useState('HDFC0000060');
+  const [bankAccount, setBankAccount] = useState('SA92 8000 0234 8912 3400 01');
+  const [selectedBank, setSelectedBank] = useState('Al Rajhi Bank');
   const [settlementMode, setSettlementMode] = useState<'INSTANT' | 'DAILY'>('INSTANT');
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -38,7 +38,7 @@ export const MerchantOnboardingScreen: React.FC = () => {
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
-    // Simulate KYB / Merchant validation
+    // Simulate KYB / Saudi Ministry of Commerce validation
     await new Promise((resolve) => setTimeout(resolve, 800));
     setIsSubmitting(false);
     setIsApproved(true);
@@ -143,7 +143,7 @@ export const MerchantOnboardingScreen: React.FC = () => {
                 type="text"
                 value={legalName}
                 onChange={(e) => setLegalName(e.target.value)}
-                placeholder="e.g. Anu Retail Enterprises Pvt Ltd"
+                placeholder="e.g. Anu Trading & Retail LLC"
                 style={{ width: '100%', backgroundColor: '#f8fafc', border: '1.5px solid #cbd5e1', borderRadius: '10px', padding: '10px 12px', fontSize: '14px', fontWeight: 700, color: '#0f172a', outline: 'none' }}
               />
             </div>
@@ -151,26 +151,28 @@ export const MerchantOnboardingScreen: React.FC = () => {
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
               <div>
                 <label style={{ fontSize: '11px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', marginBottom: '4px', display: 'block' }}>
-                  Business PAN
+                  Commercial Reg. (CR)
                 </label>
                 <input
                   type="text"
-                  value={businessPan}
-                  onChange={(e) => setBusinessPan(e.target.value.toUpperCase())}
-                  placeholder="AAACA1234F"
+                  maxLength={10}
+                  value={crNumber}
+                  onChange={(e) => setCrNumber(e.target.value.replace(/\D/g, ''))}
+                  placeholder="1010892412"
                   style={{ width: '100%', backgroundColor: '#f8fafc', border: '1.5px solid #cbd5e1', borderRadius: '10px', padding: '10px 12px', fontSize: '14px', fontWeight: 800, color: '#0f172a', outline: 'none' }}
                 />
               </div>
 
               <div>
                 <label style={{ fontSize: '11px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', marginBottom: '4px', display: 'block' }}>
-                  GSTIN (Optional)
+                  VAT Number (Optional)
                 </label>
                 <input
                   type="text"
-                  value={gstin}
-                  onChange={(e) => setGstin(e.target.value.toUpperCase())}
-                  placeholder="27AAACA..."
+                  maxLength={15}
+                  value={vatNumber}
+                  onChange={(e) => setVatNumber(e.target.value.replace(/\D/g, ''))}
+                  placeholder="310294819200003"
                   style={{ width: '100%', backgroundColor: '#f8fafc', border: '1.5px solid #cbd5e1', borderRadius: '10px', padding: '10px 12px', fontSize: '14px', fontWeight: 700, color: '#0f172a', outline: 'none' }}
                 />
               </div>
@@ -217,7 +219,7 @@ export const MerchantOnboardingScreen: React.FC = () => {
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <Store size={20} color="#2e83ff" />
               <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
-                2. Store Physical Location
+                2. Store Physical Location (KSA)
               </h3>
             </div>
 
@@ -236,25 +238,27 @@ export const MerchantOnboardingScreen: React.FC = () => {
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
               <div>
                 <label style={{ fontSize: '11px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', marginBottom: '4px', display: 'block' }}>
-                  City
+                  City (Saudi Arabia)
                 </label>
                 <input
                   type="text"
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
+                  placeholder="Riyadh"
                   style={{ width: '100%', backgroundColor: '#f8fafc', border: '1.5px solid #cbd5e1', borderRadius: '10px', padding: '10px 12px', fontSize: '14px', fontWeight: 700, color: '#0f172a', outline: 'none' }}
                 />
               </div>
 
               <div>
                 <label style={{ fontSize: '11px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', marginBottom: '4px', display: 'block' }}>
-                  Pincode
+                  Postal Code
                 </label>
                 <input
                   type="text"
-                  maxLength={6}
+                  maxLength={5}
                   value={pincode}
-                  onChange={(e) => setPincode(e.target.value)}
+                  onChange={(e) => setPincode(e.target.value.replace(/\D/g, ''))}
+                  placeholder="12214"
                   style={{ width: '100%', backgroundColor: '#f8fafc', border: '1.5px solid #cbd5e1', borderRadius: '10px', padding: '10px 12px', fontSize: '14px', fontWeight: 800, color: '#0f172a', outline: 'none' }}
                 />
               </div>
@@ -262,7 +266,7 @@ export const MerchantOnboardingScreen: React.FC = () => {
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', backgroundColor: '#eef5ff', border: '1px solid #d6e6ff', padding: '10px 12px', borderRadius: '10px', fontSize: '12px', color: '#0f172a', fontWeight: 600 }}>
               <MapPin size={16} color="#2e83ff" />
-              <span>Countertop QR Standee will be shipped to this location.</span>
+              <span>Countertop Standee QR code will be shipped to this location.</span>
             </div>
 
             <PrimaryButton onClick={() => setStep(3)}>
@@ -288,30 +292,37 @@ export const MerchantOnboardingScreen: React.FC = () => {
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <Landmark size={20} color="#2e83ff" />
               <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
-                3. Settlement Account Details
+                3. Settlement Account Details (Saudi IBAN)
               </h3>
             </div>
 
             <div>
               <label style={{ fontSize: '11px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', marginBottom: '4px', display: 'block' }}>
-                Current / Savings Account Number
+                Bank Name
               </label>
-              <input
-                type="text"
-                value={bankAccount}
-                onChange={(e) => setBankAccount(e.target.value)}
-                style={{ width: '100%', backgroundColor: '#f8fafc', border: '1.5px solid #cbd5e1', borderRadius: '10px', padding: '10px 12px', fontSize: '15px', fontWeight: 800, color: '#0f172a', outline: 'none' }}
-              />
+              <select
+                value={selectedBank}
+                onChange={(e) => setSelectedBank(e.target.value)}
+                style={{ width: '100%', backgroundColor: '#f8fafc', border: '1.5px solid #cbd5e1', borderRadius: '10px', padding: '10px 12px', fontSize: '14px', fontWeight: 700, color: '#0f172a', outline: 'none' }}
+              >
+                <option value="Al Rajhi Bank">Al Rajhi Bank</option>
+                <option value="Saudi National Bank (SNB)">Saudi National Bank (SNB)</option>
+                <option value="Riyad Bank">Riyad Bank</option>
+                <option value="Alinma Bank">Alinma Bank</option>
+                <option value="Banque Saudi Fransi">Banque Saudi Fransi</option>
+                <option value="Arab National Bank">Arab National Bank</option>
+              </select>
             </div>
 
             <div>
               <label style={{ fontSize: '11px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', marginBottom: '4px', display: 'block' }}>
-                Bank IFSC Code
+                Saudi IBAN
               </label>
               <input
                 type="text"
-                value={ifsc}
-                onChange={(e) => setIfsc(e.target.value.toUpperCase())}
+                value={bankAccount}
+                onChange={(e) => setBankAccount(e.target.value.toUpperCase())}
+                placeholder="SA92 8000 0234 8912 3400 01"
                 style={{ width: '100%', backgroundColor: '#f8fafc', border: '1.5px solid #cbd5e1', borderRadius: '10px', padding: '10px 12px', fontSize: '14px', fontWeight: 800, color: '#0f172a', outline: 'none' }}
               />
             </div>
@@ -349,7 +360,7 @@ export const MerchantOnboardingScreen: React.FC = () => {
                   }}
                 >
                   <div style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a' }}>Daily Batch</div>
-                  <div style={{ fontSize: '11px', color: '#64748b', marginTop: '2px' }}>Next morning 6 AM</div>
+                  <div style={{ fontSize: '11px', color: '#64748b', marginTop: '2px' }}>Next morning 2:00 AM</div>
                 </div>
               </div>
             </div>
@@ -397,6 +408,10 @@ export const MerchantOnboardingScreen: React.FC = () => {
                 <span style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a' }}>{tradeName}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: '12px', color: '#64748b' }}>CR Number</span>
+                <span style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a' }}>{crNumber}</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span style={{ fontSize: '12px', color: '#64748b' }}>Category</span>
                 <span style={{ fontSize: '13px', fontWeight: 700, color: '#0f172a' }}>{category}</span>
               </div>
@@ -405,8 +420,12 @@ export const MerchantOnboardingScreen: React.FC = () => {
                 <span style={{ fontSize: '13px', fontWeight: 700, color: '#0f172a' }}>{city} ({pincode})</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: '12px', color: '#64748b' }}>Settlement Bank</span>
+                <span style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a' }}>{selectedBank}</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span style={{ fontSize: '12px', color: '#64748b' }}>Settlement Mode</span>
-                <span style={{ fontSize: '13px', fontWeight: 800, color: '#2e83ff' }}>{settlementMode}</span>
+                <span style={{ fontSize: '13px', fontWeight: 800, color: '#2e83ff' }}>{settlementMode === 'INSTANT' ? 'Instant T+0' : 'Daily Batch'}</span>
               </div>
             </div>
 
@@ -425,13 +444,13 @@ export const MerchantOnboardingScreen: React.FC = () => {
               >
                 <CheckCircle2 size={20} color="#2e83ff" />
                 <span style={{ fontSize: '13px', fontWeight: 800 }}>
-                  Merchant Profile Approved & Activated!
+                  Merchant Account Approved &amp; Activated!
                 </span>
               </div>
             )}
 
             <PrimaryButton onClick={handleSubmit} disabled={isSubmitting || isApproved}>
-              {isSubmitting ? 'Verifying with NPCI Merchant Portal...' : 'Submit & Activate Merchant Account'}
+              {isSubmitting ? 'Verifying with Ministry of Commerce...' : 'Submit & Activate Merchant Account'}
             </PrimaryButton>
           </div>
         )}

@@ -6,16 +6,18 @@ import { useApp } from '../state/AppContext';
 
 export const AddBankModal: React.FC = () => {
   const { isAddBankModalOpen, setIsAddBankModalOpen, addBankAccount } = useApp();
-  const [selectedBank, setSelectedBank] = useState<string>('HDFC Bank');
+  const [selectedBank, setSelectedBank] = useState<string>('Al Rajhi Bank');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const availableBanks = [
-    { name: 'State Bank of India', code: 'SBI' },
-    { name: 'HDFC Bank', code: 'HDFC' },
-    { name: 'ICICI Bank', code: 'ICICI' },
-    { name: 'Axis Bank', code: 'AXIS' },
-    { name: 'Kotak Mahindra Bank', code: 'KOTAK' },
-    { name: 'Yes Bank', code: 'YES' },
+    { name: 'Al Rajhi Bank', code: 'RJHI' },
+    { name: 'Saudi National Bank (SNB)', code: 'SNB' },
+    { name: 'Riyad Bank', code: 'RIBL' },
+    { name: 'Alinma Bank', code: 'INMA' },
+    { name: 'Banque Saudi Fransi', code: 'BSFR' },
+    { name: 'Arab National Bank', code: 'ANBI' },
+    { name: 'Saudi Awwal Bank (SAB)', code: 'SABB' },
+    { name: 'Bank AlBilad', code: 'ALBI' },
   ];
 
   const handleAdd = async () => {

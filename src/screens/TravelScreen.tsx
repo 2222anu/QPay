@@ -27,34 +27,34 @@ export const TravelScreen: React.FC = () => {
   const bookings: TravelBooking[] = [
     {
       type: 'flight',
-      title: 'Hyderabad (HYD) ➔ Mumbai (BOM)',
-      subtitle: 'Indigo Flight • Direct • 1h 45m',
-      from: 'Hyderabad',
-      to: 'Mumbai',
-      amount: 3490,
-      provider: 'Indigo Airlines',
+      title: 'Riyadh (RUH) ➔ Jeddah (JED)',
+      subtitle: 'Saudia Flight • Direct • 1h 40m',
+      from: 'Riyadh',
+      to: 'Jeddah',
+      amount: 490,
+      provider: 'Saudia Airlines',
     },
     {
       type: 'cab',
-      title: 'Outstation Airport Cab',
-      subtitle: 'Sedan (Dzire) • Doorstep Pickup',
-      from: 'City Center',
-      to: 'Rajiv Gandhi Int. Airport',
-      amount: 850,
-      provider: 'QTPay Cabs',
+      title: 'Airport Transfer Shuttle',
+      subtitle: 'Premium Sedan • Doorstep Pickup',
+      from: 'King Fahd Road',
+      to: 'King Khalid Int. Airport (RUH)',
+      amount: 120,
+      provider: 'QTPay Mobility',
     },
     {
       type: 'hotel',
-      title: 'Taj Krishna Hyderabad',
+      title: 'Ritz-Carlton Riyadh',
       subtitle: 'Deluxe Suite • 1 Night • Breakfast Included',
-      amount: 6200,
-      provider: 'Taj Hotels',
+      amount: 1200,
+      provider: 'Ritz-Carlton Hotels',
     },
     {
       type: 'holiday',
-      title: 'Goa Weekend Getaway Package',
-      subtitle: '3 Days / 2 Nights • Resort + Scooty Included',
-      amount: 8990,
+      title: 'AlUla Heritage Getaway',
+      subtitle: '3 Days / 2 Nights • Resort + Guided Safari',
+      amount: 1990,
       provider: 'QTPay Holidays',
     },
   ];
@@ -68,7 +68,7 @@ export const TravelScreen: React.FC = () => {
 
     openPinModal({
       title: `Book ${selectedBooking.title}`,
-      subTitle: `${selectedBooking.provider} • ₹${selectedBooking.amount}`,
+      subTitle: `${selectedBooking.provider} • SAR ${selectedBooking.amount}`,
       amount: selectedBooking.amount,
       onSuccess: async () => {
         const txn = await completePayment({
@@ -139,23 +139,23 @@ export const TravelScreen: React.FC = () => {
           <ListRow
             icon={<Plane size={18} color="#2e83ff" />}
             label="Flight Bookings"
-            subLabel="HYD ➔ BOM • ₹3,490 • Indigo"
-            rightElement={<span style={{ fontSize: '12px', fontWeight: '800', color: '#2e83ff', backgroundColor: '#eef5ff', padding: '4px 10px', borderRadius: '8px' }}>Book ₹3,490</span>}
+            subLabel="RUH ➔ JED • SAR 490 • Saudia"
+            rightElement={<span style={{ fontSize: '12px', fontWeight: '800', color: '#2e83ff', backgroundColor: '#eef5ff', padding: '4px 10px', borderRadius: '8px' }}>Book SAR 490</span>}
             onClick={() => handleStartBooking(bookings[0])}
           />
           <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
           <ListRow
             icon={<Car size={18} color="#2e83ff" />}
             label="Cab & Airport Bus"
-            subLabel="Airport Pickup • ₹850 • Sedan"
-            rightElement={<span style={{ fontSize: '12px', fontWeight: '800', color: '#2e83ff', backgroundColor: '#eef5ff', padding: '4px 10px', borderRadius: '8px' }}>Book ₹850</span>}
+            subLabel="Airport Pickup • SAR 120 • Sedan"
+            rightElement={<span style={{ fontSize: '12px', fontWeight: '800', color: '#2e83ff', backgroundColor: '#eef5ff', padding: '4px 10px', borderRadius: '8px' }}>Book SAR 120</span>}
             onClick={() => handleStartBooking(bookings[1])}
           />
           <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
           <ListRow
             icon={<Hotel size={18} color="#2e83ff" />}
             label="Hotel Reservations"
-            subLabel="Taj Krishna Deluxe • ₹6,200/night"
+            subLabel="Ritz-Carlton Riyadh • SAR 1,200/night"
             rightElement={<span style={{ fontSize: '12px', fontWeight: '800', color: '#2e83ff', backgroundColor: '#eef5ff', padding: '4px 10px', borderRadius: '8px' }}>Reserve</span>}
             onClick={() => handleStartBooking(bookings[2])}
           />
@@ -163,7 +163,7 @@ export const TravelScreen: React.FC = () => {
           <ListRow
             icon={<Compass size={18} color="#2e83ff" />}
             label="Holiday Packages"
-            subLabel="Goa 3D/2N Tour • ₹8,990"
+            subLabel="AlUla 3D/2N Tour • SAR 1,990"
             rightElement={<span style={{ fontSize: '12px', fontWeight: '800', color: '#2e83ff', backgroundColor: '#eef5ff', padding: '4px 10px', borderRadius: '8px' }}>Explore</span>}
             onClick={() => handleStartBooking(bookings[3])}
           />
@@ -229,7 +229,7 @@ export const TravelScreen: React.FC = () => {
               <div style={{ fontSize: '12px', color: '#64748b', marginTop: '4px' }}>{selectedBooking.subtitle}</div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '14px', paddingTop: '10px', borderTop: '1px dashed #cbd5e1' }}>
                 <span style={{ fontSize: '13px', fontWeight: '700', color: '#64748b' }}>Total Payable Amount</span>
-                <span style={{ fontSize: '20px', fontWeight: '800', color: '#2e83ff', fontVariantNumeric: 'tabular-nums' }}>₹{selectedBooking.amount.toLocaleString()}</span>
+                <span style={{ fontSize: '20px', fontWeight: '800', color: '#2e83ff', fontVariantNumeric: 'tabular-nums' }}>SAR {selectedBooking.amount.toLocaleString()}</span>
               </div>
             </div>
 
@@ -248,7 +248,7 @@ export const TravelScreen: React.FC = () => {
                 cursor: 'pointer',
               }}
             >
-              Pay ₹{selectedBooking.amount.toLocaleString()} via UPI PIN
+              Pay SAR {selectedBooking.amount.toLocaleString()} via UPI PIN
             </button>
           </div>
         </div>
@@ -316,7 +316,7 @@ export const TravelScreen: React.FC = () => {
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '8px', borderTop: '1px dashed #cbd5e1' }}>
                 <span style={{ fontSize: '13px', fontWeight: '700', color: '#0f172a' }}>Amount Paid</span>
-                <span style={{ fontSize: '15px', fontWeight: '800', color: '#2e83ff', fontVariantNumeric: 'tabular-nums' }}>₹{confirmedTicket.amount.toLocaleString()}</span>
+                <span style={{ fontSize: '15px', fontWeight: '800', color: '#2e83ff', fontVariantNumeric: 'tabular-nums' }}>SAR {confirmedTicket.amount.toLocaleString()}</span>
               </div>
             </div>
 

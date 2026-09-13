@@ -6,7 +6,7 @@ import { useApp } from '../state/AppContext';
 
 export const SmsOtpScreen: React.FC = () => {
   const { navigateTo, screenParams } = useApp();
-  const mobile = screenParams.mobile || '9876543210';
+  const mobile = screenParams.mobile || '501234567';
 
   const [otp, setOtp] = useState<string[]>(['5', '8', '9', '2', '0', '4']);
   const [timer, setTimer] = useState(28);
@@ -74,7 +74,7 @@ export const SmsOtpScreen: React.FC = () => {
               </h2>
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', backgroundColor: '#eef5ff', border: '1px solid #d6e6ff', padding: '4px 14px', borderRadius: '12px' }}>
                 <span className="tabular-nums" style={{ fontSize: '13.5px', fontWeight: 800, color: '#2e83ff' }}>
-                  +91 {mobile}
+                  +966 {mobile}
                 </span>
               </div>
             </div>
@@ -170,7 +170,7 @@ export const SmsOtpScreen: React.FC = () => {
 
             {isResent && (
               <div style={{ textAlign: 'center', fontSize: '12px', color: '#2e83ff', fontWeight: 700 }}>
-                ✓ New 6-digit code dispatched to +91 {mobile}
+                ✓ New 6-digit code dispatched to +966 {mobile}
               </div>
             )}
           </div>

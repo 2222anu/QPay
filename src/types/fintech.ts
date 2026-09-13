@@ -28,7 +28,7 @@ export interface FintechTransaction {
   subTitle: string;
   amount: number;
   fee: number;
-  currency: 'INR';
+  currency: 'SAR';
   status: TransactionStatus;
   timestamp: Date;
   dateStr: string;
@@ -141,7 +141,8 @@ export type MerchantVerificationStatus = 'VERIFIED' | 'PENDING_REVIEW' | 'ACTION
 
 export interface MerchantSettlementConfig {
   accountNumberMasked: string;
-  ifsc: string;
+  iban?: string;
+  ifsc?: string;
   bankName: string;
   mode: 'INSTANT_SETTLEMENT' | 'DAILY_BATCH_2AM';
 }
@@ -151,8 +152,10 @@ export interface MerchantProfile {
   businessName: string;
   tradeName: string;
   businessCategory: string;
+  crNumber?: string;
+  vatNumber?: string;
   gstin?: string;
-  businessPan: string;
+  businessPan?: string;
   storeAddress: string;
   city: string;
   pincode: string;
@@ -208,7 +211,7 @@ export interface SoundBoxDevice {
   batteryLevel: number;
   networkSignal: '4G_LTE' | 'WIFI' | 'OFFLINE';
   volume: number; // 1 - 10
-  language: 'English' | 'Hindi' | 'Tamil' | 'Telugu' | 'Marathi';
+  language: 'Arabic' | 'English' | 'Hindi' | 'Tamil' | 'Telugu' | 'Marathi';
   lastSpokenText?: string;
   lastSpokenTimestamp?: Date;
 }

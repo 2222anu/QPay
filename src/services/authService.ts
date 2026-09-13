@@ -6,7 +6,7 @@ export const authService = {
       name: 'Anu',
       avatarInitials: 'AN',
       upiId: 'anu@qtpay',
-      mobile: '+91 98765 43210',
+      mobile: '+966 50 123 4567',
       email: 'anu@qtpay.com',
     };
   },

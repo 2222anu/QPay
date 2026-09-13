@@ -110,7 +110,7 @@ export const UPISettingsScreen: React.FC = () => {
           <ListRow
             icon={<ShieldCheck size={18} color="#2e83ff" />}
             label="UPI Payment Limit"
-            rightElement={<span style={{ fontSize: '11px', color: '#2e83ff', fontWeight: '800', backgroundColor: '#eef5ff', border: '1px solid #d6e6ff', padding: '3px 8px', borderRadius: '6px' }}>₹1,00,000 / day</span>}
+            rightElement={<span style={{ fontSize: '11px', color: '#2e83ff', fontWeight: '800', backgroundColor: '#eef5ff', border: '1px solid #d6e6ff', padding: '3px 8px', borderRadius: '6px' }}>SAR 100,000 / day</span>}
           />
         </div>
       </div>

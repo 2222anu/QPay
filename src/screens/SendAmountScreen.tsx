@@ -12,7 +12,7 @@ export const SendAmountScreen: React.FC = () => {
     name: 'Priya Menon',
     upiId: 'priya@paytm',
     avatarInitials: 'PM',
-    mobile: '+91 98765 00001',
+    mobile: '+966 50 123 0001',
   };
 
   const initialAmount = screenParams.defaultAmount ? String(screenParams.defaultAmount) : '';
@@ -118,7 +118,7 @@ export const SendAmountScreen: React.FC = () => {
               marginBottom: '20px',
             }}
           >
-            <span style={{ fontSize: '36px', fontWeight: 800, color: '#2e83ff' }}>₹</span>
+            <span style={{ fontSize: '26px', fontWeight: 800, color: '#2e83ff' }}>SAR</span>
             <input
               type="number"
               value={amountStr}
@@ -162,7 +162,7 @@ export const SendAmountScreen: React.FC = () => {
                     transition: 'all 0.15s ease',
                   }}
                 >
-                  +₹{val}
+                  +{val} SAR
                 </button>
               );
             })}
@@ -201,7 +201,7 @@ export const SendAmountScreen: React.FC = () => {
         </div>
 
         <PrimaryButton onClick={handlePayClick} disabled={numAmount <= 0}>
-          Pay ₹{numAmount ? numAmount.toLocaleString('en-IN') : '0'}
+          Pay SAR {numAmount ? numAmount.toLocaleString('en-US') : '0'}
         </PrimaryButton>
       </div>
     </div>

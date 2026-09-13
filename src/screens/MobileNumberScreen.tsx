@@ -7,12 +7,12 @@ import { useApp } from '../state/AppContext';
 export const MobileNumberScreen: React.FC = () => {
   const { navigateTo, user, updateUser, setIsLanguageModalOpen, language } = useApp();
   const [fullName, setFullName] = useState<string>(user.name || 'Anu');
-  const [mobileNumber, setMobileNumber] = useState<string>('9876543210');
+  const [mobileNumber, setMobileNumber] = useState<string>('501234567');
 
   const handleContinue = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
-    if (mobileNumber.length >= 10 && fullName.trim().length > 0) {
-      updateUser({ name: fullName, mobile: `+91 ${mobileNumber}` });
+    if (mobileNumber.length >= 9 && fullName.trim().length > 0) {
+      updateUser({ name: fullName, mobile: `+966 ${mobileNumber}` });
       navigateTo('SMS_OTP', { mobile: mobileNumber, name: fullName });
     }
   };
@@ -169,7 +169,7 @@ export const MobileNumberScreen: React.FC = () => {
             </div>
           </div>
 
-          {/* Mobile Number Input with +91 Country Badge */}
+          {/* Mobile Number Input with +966 Country Badge */}
           <div>
             <label
               htmlFor="mobile-input"
@@ -209,8 +209,8 @@ export const MobileNumberScreen: React.FC = () => {
                   flexShrink: 0,
                 }}
               >
-                <span style={{ fontSize: '15px' }}>🇮🇳</span>
-                <span style={{ fontWeight: 800, fontSize: '14px', color: '#2e83ff' }}>+91</span>
+                <span style={{ fontSize: '15px' }}>🇸🇦</span>
+                <span style={{ fontWeight: 800, fontSize: '14px', color: '#2e83ff' }}>+966</span>
               </div>
               <input
                 id="mobile-input"
@@ -218,7 +218,7 @@ export const MobileNumberScreen: React.FC = () => {
                 value={mobileNumber}
                 onChange={(e) => setMobileNumber(e.target.value.replace(/[^0-9]/g, ''))}
                 maxLength={10}
-                placeholder="9876543210"
+                placeholder="501234567"
                 required
                 className="tabular-nums"
                 style={{
@@ -237,7 +237,7 @@ export const MobileNumberScreen: React.FC = () => {
 
 
 
-          <PrimaryButton type="submit" disabled={mobileNumber.length < 10 || fullName.trim().length === 0}>
+          <PrimaryButton type="submit" disabled={mobileNumber.length < 9 || fullName.trim().length === 0}>
             Get OTP Verification Code <ArrowRight size={18} />
           </PrimaryButton>
         </form>

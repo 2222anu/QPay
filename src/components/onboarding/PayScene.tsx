@@ -75,7 +75,7 @@ export const PayScene: React.FC = () => {
         <QrCode size={28} />
       </div>
 
-      {/* Floating Rupee Coin 1 (Top Right) */}
+      {/* Floating Riyal Coin 1 (Top Right) */}
       <div
         style={{
           position: 'absolute',
@@ -90,17 +90,17 @@ export const PayScene: React.FC = () => {
           alignItems: 'center',
           justifyContent: 'center',
           fontWeight: 900,
-          fontSize: '18px',
+          fontSize: '11px',
           color: '#1d4ed8',
           zIndex: 4,
           boxShadow: '0 10px 24px rgba(46, 131, 255, 0.22)',
           animation: 'floatCoin 4.5s ease-in-out infinite alternate',
         }}
       >
-        ₹
+        SAR
       </div>
 
-      {/* Floating Rupee Coin 2 (Bottom Left) */}
+      {/* Floating Riyal Coin 2 (Bottom Left) */}
       <div
         style={{
           position: 'absolute',
@@ -115,14 +115,14 @@ export const PayScene: React.FC = () => {
           alignItems: 'center',
           justifyContent: 'center',
           fontWeight: 900,
-          fontSize: '14px',
+          fontSize: '9px',
           color: '#2563eb',
           zIndex: 4,
           boxShadow: '0 8px 18px rgba(37, 99, 235, 0.18)',
           animation: 'floatCoin 3.8s ease-in-out infinite alternate-reverse',
         }}
       >
-        ₹
+        SAR
       </div>
 
       {/* Main 3D Smartphone Device Body */}
@@ -205,14 +205,14 @@ export const PayScene: React.FC = () => {
               Payment Successful
             </div>
 
-            <div style={{ fontSize: '22px', fontWeight: 900, color: '#ffffff', letterSpacing: '0.02em' }}>
-              ₹2,500
+            <div style={{ fontSize: '20px', fontWeight: 900, color: '#ffffff', letterSpacing: '0.02em' }}>
+              SAR 2,500
             </div>
           </div>
 
           {/* Payee Info Sub-label */}
           <div style={{ fontSize: '9px', color: '#94a3b8', fontWeight: 600 }}>
-            Priya Menon &bull; Instant UPI
+            Tariq Al-Mansoor &bull; Instant Pay
           </div>
         </div>
       </div>

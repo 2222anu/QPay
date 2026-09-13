@@ -17,7 +17,7 @@ export const HelpSupportScreen: React.FC = () => {
 
   const faqs = [
     { q: 'How long does a UPI refund take?', a: 'Instant UPI refunds are usually credited within 1-2 hours. In rare bank network delays, it can take up to 24-48 hours.' },
-    { q: 'What is the daily UPI transfer limit?', a: 'As per NPCI guidelines, the standard daily UPI transaction limit is ₹1,00,000 across all UPI apps.' },
+    { q: 'What is the daily transfer limit?', a: 'As per SAMA banking guidelines, the standard daily instant payment limit is SAR 20,000 to SAR 100,000 depending on your account tier.' },
     { q: 'How do I add a new bank account?', a: 'Go to Profile > Bank Accounts > tap Add Bank, select your bank, and verify your mobile number via SMS.' },
   ];
 

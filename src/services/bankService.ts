@@ -3,7 +3,7 @@ import type { BankAccount } from '../types';
 const INITIAL_BANKS: BankAccount[] = [
   {
     id: 'bank-1',
-    bankName: 'ICICI Bank',
+    bankName: 'Al Rajhi Bank',
     accountType: 'Savings Account',
     accountNumberMasked: '**** 3616',
     isPrimary: true,
@@ -12,7 +12,7 @@ const INITIAL_BANKS: BankAccount[] = [
   },
   {
     id: 'bank-2',
-    bankName: 'Yes Bank',
+    bankName: 'Saudi National Bank (SNB)',
     accountType: 'Savings Account',
     accountNumberMasked: '**** 8821',
     isPrimary: false,
@@ -21,7 +21,7 @@ const INITIAL_BANKS: BankAccount[] = [
   },
   {
     id: 'bank-3',
-    bankName: 'Kotak Mahindra Bank',
+    bankName: 'Riyad Bank',
     accountType: 'Current Account',
     accountNumberMasked: '**** 5590',
     isPrimary: false,

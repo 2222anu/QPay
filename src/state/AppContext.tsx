@@ -18,6 +18,7 @@ import { notificationService } from '../services/notificationService';
 import { billPaymentService } from '../services/billPaymentService';
 import { translate, setGlobalLanguage, type SupportedLanguage } from '../utils/i18n';
 import { applyLanguageToDOM } from '../utils/domTranslator';
+import { formatCurrency } from '../utils/formatters';
 
 interface AppContextType {
   // Navigation & Screen Stack
@@ -92,17 +93,17 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 const FREQUENT_CONTACTS: Contact[] = [
-  { id: 'c-1', name: 'Rahul Sharma', upiId: 'rahul@upi', mobile: '+91 98123 45678', avatarInitials: 'RS' },
-  { id: 'c-2', name: 'Ajay Singh', upiId: 'ajay@okicici', mobile: '+91 98234 56789', avatarInitials: 'AS' },
-  { id: 'c-3', name: 'Priya Menon', upiId: 'priya@paytm', mobile: '+91 98345 67890', avatarInitials: 'PM' },
-  { id: 'c-4', name: 'Amit Verma', upiId: 'amit@ybl', mobile: '+91 98456 78901', avatarInitials: 'AV' },
-  { id: 'c-5', name: 'Sara Al Mansoori', upiId: 'sara@qtpay', mobile: '+971 50 123 4567', avatarInitials: 'SM' },
-  { id: 'c-6', name: 'Omar Khalid', upiId: 'omar@qtpay', mobile: '+971 52 987 6543', avatarInitials: 'OK' },
+  { id: 'c-1', name: 'Tariq Al-Harbi', upiId: 'tariq@qtpay', mobile: '+966 50 234 5678', avatarInitials: 'TH' },
+  { id: 'c-2', name: 'Sara Al-Mansoor', upiId: 'sara@qtpay', mobile: '+966 55 345 6789', avatarInitials: 'SM' },
+  { id: 'c-3', name: 'Omar Khalid', upiId: 'omar@qtpay', mobile: '+966 54 456 7890', avatarInitials: 'OK' },
+  { id: 'c-4', name: 'Fahad Al-Otaibi', upiId: 'fahad@qtpay', mobile: '+966 56 567 8901', avatarInitials: 'FO' },
+  { id: 'c-5', name: 'Noura Al-Zahrani', upiId: 'noura@qtpay', mobile: '+966 50 678 9012', avatarInitials: 'NZ' },
+  { id: 'c-6', name: 'Mohammed Al-Ghamdi', upiId: 'mohammed@qtpay', mobile: '+966 53 789 0123', avatarInitials: 'MG' },
 ];
 
 const MERCHANTS: Contact[] = [
-  { id: 'm-1', name: 'Star Supermarket', upiId: 'starsuper@icici', mobile: 'Merchant #8491', avatarInitials: 'SS', isMerchant: true },
-  { id: 'm-2', name: 'Cafe Aroma', upiId: 'cafearoma@paytm', mobile: 'Merchant #2041', avatarInitials: 'CA', isMerchant: true },
+  { id: 'm-1', name: 'Tamimi Markets', upiId: 'tamimi@qtpay', mobile: 'Merchant #8491', avatarInitials: 'TM', isMerchant: true },
+  { id: 'm-2', name: 'Panda Retail', upiId: 'panda@qtpay', mobile: 'Merchant #2041', avatarInitials: 'PR', isMerchant: true },
 ];
 
 const INITIAL_SESSIONS: DeviceSession[] = [
@@ -126,7 +127,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     name: 'Anu',
     avatarInitials: 'AN',
     upiId: 'anu@qtpay',
-    mobile: '+91 98765 43210',
+    mobile: '+966 50 123 4567',
     email: 'anu@qtpay.com',
   });
 
@@ -354,7 +355,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setTransactions((prev) => [newTxn, ...prev]);
     setLastTransaction(newTxn);
 
-    const formattedAmt = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(params.amount);
+    const formattedAmt = formatCurrency(params.amount);
     const newNotif: AppNotification = {
       id: `notif-${Date.now()}`,
       title: 'Payment successful',
