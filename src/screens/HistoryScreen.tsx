@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import { Search, X, Receipt } from 'lucide-react';
+import { Search, X, Receipt, Share2, FileText } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { TransactionRow } from '../components/TransactionRow';
+import { InfoDetailsSheet } from '../components/InfoDetailsSheet';
+import { TransactionStatusBadge } from '../components/TransactionStatusBadge';
 import { useApp } from '../state/AppContext';
+import type { Transaction } from '../types';
+import { formatDate } from '../utils/formatters';
 
 type FilterType = 'all' | 'sent' | 'received' | 'pending';
 
@@ -11,6 +15,7 @@ export const HistoryScreen: React.FC = () => {
   const [filter, setFilter] = useState<FilterType>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [showSearchInput, setShowSearchInput] = useState(false);
+  const [selectedTxn, setSelectedTxn] = useState<Transaction | null>(null);
 
   const filteredTransactions = transactions.filter((t) => {
     const matchesFilter =
@@ -191,7 +196,10 @@ export const HistoryScreen: React.FC = () => {
                 {items.map((txn, index) => (
                   <React.Fragment key={txn.id}>
                     {index > 0 && <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />}
-                    <TransactionRow transaction={txn} />
+                    <TransactionRow
+                      transaction={txn}
+                      onClick={() => setSelectedTxn(txn)}
+                    />
                   </React.Fragment>
                 ))}
               </div>
@@ -199,6 +207,46 @@ export const HistoryScreen: React.FC = () => {
           ))
         )}
       </div>
+
+      {/* Reusable Transaction Details Sheet */}
+      {selectedTxn && (
+        <InfoDetailsSheet
+          isOpen={Boolean(selectedTxn)}
+          onClose={() => setSelectedTxn(null)}
+          title={selectedTxn.type === 'received' ? 'Money Received' : 'Payment Paid'}
+          subTitle={selectedTxn.subTitle || 'UPI Bank Transfer'}
+          badge={<TransactionStatusBadge status={selectedTxn.type === 'pending' ? 'PROCESSING' : 'SUCCESS'} size="sm" />}
+          amount={selectedTxn.amount}
+          items={[
+            { label: 'Payee / Beneficiary', value: selectedTxn.title, isHighlight: true },
+            { label: 'Transaction ID', value: selectedTxn.id, isCopyable: true },
+            { label: 'UTR / Reference No', value: selectedTxn.utr, isCopyable: true },
+            { label: 'Date & Time', value: formatDate(selectedTxn.timestamp) },
+            { label: 'Category', value: selectedTxn.category || 'Payment' },
+            { label: 'Payment Mode', value: 'ICICI Bank Savings •••• 3616' },
+          ]}
+          footerNotice="256-Bit Encrypted &bull; NPCI Verified Financial Record"
+          primaryAction={{
+            label: 'Share Receipt',
+            icon: <Share2 size={16} />,
+            onClick: () => {
+              if (navigator.share) {
+                navigator.share({
+                  title: 'QTPay Receipt',
+                  text: `Payment of ₹${selectedTxn.amount} to ${selectedTxn.title}. UTR: ${selectedTxn.utr}`,
+                }).catch(() => {});
+              }
+            },
+          }}
+          secondaryAction={{
+            label: 'Download Tax Invoice',
+            icon: <FileText size={16} />,
+            onClick: () => {
+              setSelectedTxn(null);
+            },
+          }}
+        />
+      )}
     </div>
   );
 };

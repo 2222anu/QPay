@@ -16,6 +16,8 @@ import { bankService } from '../services/bankService';
 import { transactionService } from '../services/transactionService';
 import { notificationService } from '../services/notificationService';
 import { billPaymentService } from '../services/billPaymentService';
+import { translate, setGlobalLanguage, type SupportedLanguage } from '../utils/i18n';
+import { applyLanguageToDOM } from '../utils/domTranslator';
 
 interface AppContextType {
   // Navigation & Screen Stack
@@ -40,6 +42,7 @@ interface AppContextType {
   electricityBill: ElectricityBill | null;
   language: string;
   isRtl: boolean;
+  t: (key: string) => string;
 
   // Actions
   updateUser: (updatedData: Partial<User>) => void;
@@ -145,8 +148,26 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   ]);
   const [deviceSessions, setDeviceSessions] = useState<DeviceSession[]>(INITIAL_SESSIONS);
 
-  const [language, setLanguage] = useState<string>('English');
-  const [isRtl, setIsRtl] = useState<boolean>(false);
+  const [language, setLanguage] = useState<string>(() => {
+    try {
+      return localStorage.getItem('qtpay_lang') || 'English';
+    } catch {
+      return 'English';
+    }
+  });
+  const [isRtl, setIsRtl] = useState<boolean>(() => {
+    try {
+      return localStorage.getItem('qtpay_lang') === 'العربية';
+    } catch {
+      return false;
+    }
+  });
+
+  const t = (key: string) => translate(key, language as SupportedLanguage);
+
+  useEffect(() => {
+    applyLanguageToDOM(language as SupportedLanguage);
+  }, [language]);
 
   // Modals state
   const [isPinModalOpen, setIsPinModalOpen] = useState<boolean>(false);
@@ -193,6 +214,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       setIsScanModalOpen,
       setIsAppLinksModalOpen,
       setIsEditProfileModalOpen,
+      setAppLanguage,
       currentScreen,
     };
   });
@@ -376,8 +398,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const setAppLanguage = (lang: string) => {
     setLanguage(lang);
+    setGlobalLanguage(lang as SupportedLanguage);
     setIsRtl(lang === 'العربية');
     setIsLanguageModalOpen(false);
+    applyLanguageToDOM(lang as SupportedLanguage);
   };
 
   const performLogout = () => {
@@ -430,6 +454,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         electricityBill,
         language,
         isRtl,
+        t,
         updateUser,
         toggleShowBalance,
         addBankAccount,

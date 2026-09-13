@@ -66,7 +66,7 @@ export const PermissionsScreen: React.FC = () => {
     } catch {
       // Ignore
     }
-    navigateTo('HOME');
+    navigateTo('CUSTOMER_KYC');
   };
 
   return (

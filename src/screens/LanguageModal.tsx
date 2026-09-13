@@ -8,10 +8,12 @@ export const LanguageModal: React.FC = () => {
   const { isLanguageModalOpen, setIsLanguageModalOpen, language, setAppLanguage } = useApp();
 
   const languages = [
-    { name: 'English', native: 'English' },
-    { name: 'العربية', native: 'Arabic' },
-    { name: 'Hindi', native: 'हिंदी' },
-    { name: 'Spanish', native: 'Español' },
+    { name: 'English', native: 'English (Default)' },
+    { name: 'Telugu', native: 'తెలుగు (Telugu)' },
+    { name: 'Hindi', native: 'हिंदी (Hindi)' },
+    { name: 'Tamil', native: 'தமிழ் (Tamil)' },
+    { name: 'Spanish', native: 'Español (Spanish)' },
+    { name: 'العربية', native: 'العربية (Arabic - RTL)' },
   ];
 
   return (

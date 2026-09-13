@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Plane, Car, Hotel, Compass, X, CheckCircle2, Ticket } from 'lucide-react';
+import { Plane, Car, Hotel, Compass, X, CheckCircle2 } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { ListRow } from '../components/ListRow';
 import { useApp } from '../state/AppContext';

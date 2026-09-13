@@ -80,6 +80,58 @@ export const AllServicesScreen: React.FC = () => {
       <AppHeader title="All Services" showBack showSettings />
 
       <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        {/* BBPS Biller Code Action Banner */}
+        <div
+          onClick={() => navigateTo('BILLER_CODE')}
+          className="interactive-tap"
+          style={{
+            background: 'linear-gradient(135deg, #071529 0%, #0a2540 60%, #1d4ed8 100%)',
+            border: '1.5px solid rgba(56, 189, 248, 0.35)',
+            borderRadius: '16px',
+            padding: '16px 18px',
+            color: '#ffffff',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            cursor: 'pointer',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div
+              style={{
+                width: '40px',
+                height: '40px',
+                borderRadius: '10px',
+                backgroundColor: 'rgba(46, 131, 255, 0.25)',
+                color: '#38bdf8',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <FileText size={20} />
+            </div>
+            <div>
+              <div style={{ fontSize: '15px', fontWeight: 800, color: '#ffffff' }}>Pay by Biller Code</div>
+              <div style={{ fontSize: '11.5px', color: '#94a3b8', marginTop: '2px' }}>
+                Instant bill fetch across 20,000+ national BBPS billers
+              </div>
+            </div>
+          </div>
+          <div
+            style={{
+              backgroundColor: '#2e83ff',
+              color: '#ffffff',
+              borderRadius: '8px',
+              padding: '6px 12px',
+              fontSize: '11px',
+              fontWeight: 800,
+            }}
+          >
+            Search
+          </div>
+        </div>
+
         {/* Bill Payments Grid */}
         <div>
           <div style={{ fontSize: '11px', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>

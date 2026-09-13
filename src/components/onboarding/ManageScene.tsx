@@ -1,5 +1,5 @@
 import React from 'react';
-import { Landmark, ArrowRightLeft, Zap, Smartphone, Wifi, Wallet } from 'lucide-react';
+import { Landmark, ArrowRightLeft, Zap, Wifi, Wallet } from 'lucide-react';
 
 export const ManageScene: React.FC = () => {
   return (

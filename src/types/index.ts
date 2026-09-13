@@ -107,6 +107,17 @@ export type ScreenId =
   | 'MESSAGES'
   | 'TRAVEL'
   | 'REWARDS'
-  | 'FOOD';
+  | 'FOOD'
+  | 'CUSTOMER_KYC'
+  | 'CUSTOMER_PIN_SETUP'
+  | 'CUSTOMER_SECURITY_SETUP'
+  | 'BILLER_CODE'
+  | 'CARDS'
+  | 'MERCHANT_DASHBOARD'
+  | 'MERCHANT_ONBOARDING'
+  | 'SOFTPOS'
+  | 'SOUND_BOX';
 
 export type BottomTab = 'home' | 'account' | 'pay' | 'scan' | 'history' | 'profile';
+
+export * from './fintech';

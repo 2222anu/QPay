@@ -10,6 +10,9 @@ import {
   Car,
   ChevronRight,
   Landmark,
+  CreditCard,
+  Store,
+  QrCode,
 } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { QPayHeroBanner } from '../components/QPayHeroBanner';
@@ -419,6 +422,137 @@ export const HomeScreen: React.FC = () => {
             <span style={{ fontSize: '12px', fontWeight: '700', color: '#0f172a', textAlign: 'center' }}>
               FASTag
             </span>
+          </div>
+        </div>
+      </div>
+
+      {/* 5b. Fintech Hub: Cards & Merchant Suite */}
+      <div
+        style={{
+          margin: '0 20px 20px 20px',
+          backgroundColor: '#ffffff',
+          border: '1px solid #e2e8f0',
+          borderRadius: '14px',
+          padding: '18px',
+          boxShadow: 'none',
+        }}
+      >
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
+          <h3 style={{ fontSize: '15.5px', fontWeight: '800', color: '#0f172a', letterSpacing: '-0.01em', margin: 0 }}>
+            Cards & Business Hub
+          </h3>
+          <span style={{ fontSize: '11px', fontWeight: '700', color: '#2e83ff', backgroundColor: '#eef5ff', padding: '2px 8px', borderRadius: '10px', border: '1px solid #d6e6ff' }}>
+            Fintech Suite
+          </span>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
+          {/* Cards Hub */}
+          <div
+            onClick={() => navigateTo('CARDS')}
+            className="interactive-tap"
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              padding: '12px 6px',
+              backgroundColor: '#f8fafc',
+              border: '1px solid #e2e8f0',
+              borderRadius: '12px',
+              cursor: 'pointer',
+              textAlign: 'center',
+              gap: '6px',
+            }}
+          >
+            <div
+              style={{
+                width: '42px',
+                height: '42px',
+                borderRadius: '12px',
+                backgroundColor: '#eef5ff',
+                color: '#2e83ff',
+                border: '1px solid #d6e6ff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <CreditCard size={20} />
+            </div>
+            <span style={{ fontSize: '11.5px', fontWeight: 800, color: '#0f172a' }}>Cards Hub</span>
+            <span style={{ fontSize: '9.5px', color: '#64748b' }}>Virtual & Limits</span>
+          </div>
+
+          {/* Merchant Hub */}
+          <div
+            onClick={() => navigateTo('MERCHANT_DASHBOARD')}
+            className="interactive-tap"
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              padding: '12px 6px',
+              backgroundColor: '#f8fafc',
+              border: '1px solid #e2e8f0',
+              borderRadius: '12px',
+              cursor: 'pointer',
+              textAlign: 'center',
+              gap: '6px',
+            }}
+          >
+            <div
+              style={{
+                width: '42px',
+                height: '42px',
+                borderRadius: '12px',
+                backgroundColor: '#eef5ff',
+                color: '#2e83ff',
+                border: '1px solid #d6e6ff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Store size={20} />
+            </div>
+            <span style={{ fontSize: '11.5px', fontWeight: 800, color: '#0f172a' }}>Merchant</span>
+            <span style={{ fontSize: '9.5px', color: '#64748b' }}>SoftPOS & SoundBox</span>
+          </div>
+
+          {/* BBPS Biller Code */}
+          <div
+            onClick={() => navigateTo('BILLER_CODE')}
+            className="interactive-tap"
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              padding: '12px 6px',
+              backgroundColor: '#f8fafc',
+              border: '1px solid #e2e8f0',
+              borderRadius: '12px',
+              cursor: 'pointer',
+              textAlign: 'center',
+              gap: '6px',
+            }}
+          >
+            <div
+              style={{
+                width: '42px',
+                height: '42px',
+                borderRadius: '12px',
+                backgroundColor: '#eef5ff',
+                color: '#2e83ff',
+                border: '1px solid #d6e6ff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <QrCode size={20} />
+            </div>
+            <span style={{ fontSize: '11.5px', fontWeight: 800, color: '#0f172a' }}>BBPS Code</span>
+            <span style={{ fontSize: '9.5px', color: '#64748b' }}>Instant Fetch</span>
           </div>
         </div>
       </div>

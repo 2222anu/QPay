@@ -163,15 +163,17 @@ export const PaymentMethodsScreen: React.FC = () => {
           </div>
 
           <div
+            onClick={() => navigateTo('CARDS')}
+            className="interactive-tap"
             style={{
               backgroundColor: '#ffffff',
               border: '1px solid #e2e8f0',
               borderRadius: '16px',
               padding: '16px 18px',
-              boxShadow: '0 2px 8px rgba(15, 23, 42, 0.03)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
+              cursor: 'pointer',
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
@@ -193,7 +195,7 @@ export const PaymentMethodsScreen: React.FC = () => {
               <div>
                 <div style={{ fontSize: '15px', fontWeight: 800, color: '#0f172a' }}>ICICI RuPay Credit Card</div>
                 <div style={{ fontSize: '12px', color: '#64748b', marginTop: '2px', fontFamily: 'monospace', letterSpacing: '0.05em' }}>
-                  •••• 9901 &bull; UPI Enabled
+                  •••• 9901 &bull; Tap to Open Cards Hub
                 </div>
               </div>
             </div>
@@ -211,7 +213,7 @@ export const PaymentMethodsScreen: React.FC = () => {
                   borderRadius: '10px',
                 }}
               >
-                LINKED
+                CARDS HUB
               </span>
             </div>
           </div>

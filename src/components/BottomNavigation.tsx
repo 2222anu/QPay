@@ -4,7 +4,7 @@ import { useApp } from '../state/AppContext';
 import type { BottomTab } from '../types';
 
 export const BottomNavigation: React.FC = () => {
-  const { activeTab, setActiveTab } = useApp();
+  const { activeTab, setActiveTab, t } = useApp();
 
   const tabs: { id: BottomTab; label: string; icon: (active: boolean) => React.ReactNode }[] = [
     { id: 'home', label: 'Home', icon: (a) => <Home size={20} strokeWidth={a ? 2.5 : 1.8} /> },
@@ -92,7 +92,7 @@ export const BottomNavigation: React.FC = () => {
                   letterSpacing: '0.04em',
                 }}
               >
-                {tab.label}
+                {t(tab.label)}
               </span>
             </div>
           );
@@ -135,7 +135,7 @@ export const BottomNavigation: React.FC = () => {
                 letterSpacing: '-0.01em',
               }}
             >
-              {tab.label}
+              {t(tab.label)}
             </span>
 
             {/* Active Subtle Bottom Indicator Pill */}

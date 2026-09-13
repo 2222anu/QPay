@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Landmark, Check, ShieldCheck } from 'lucide-react';
+import { Landmark, Check } from 'lucide-react';
 import { BottomSheet } from '../components/BottomSheet';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { useApp } from '../state/AppContext';

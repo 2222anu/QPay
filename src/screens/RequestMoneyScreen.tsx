@@ -3,7 +3,6 @@ import { AppHeader } from '../components/AppHeader';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { useApp } from '../state/AppContext';
 import type { Contact } from '../types';
-import { designSystem } from '../design-system';
 
 export const RequestMoneyScreen: React.FC = () => {
   const { contacts, addMoneyRequest } = useApp();

@@ -35,6 +35,17 @@ import { TravelScreen } from './screens/TravelScreen';
 import { RewardsScreen } from './screens/RewardsScreen';
 import { FoodScreen } from './screens/FoodScreen';
 
+// Fintech & Merchant Enhancement Screens
+import { CustomerKycScreen } from './screens/CustomerKycScreen';
+import { CustomerPinSetupScreen } from './screens/CustomerPinSetupScreen';
+import { CustomerSecuritySetupScreen } from './screens/CustomerSecuritySetupScreen';
+import { BillerCodeScreen } from './screens/BillerCodeScreen';
+import { CardsScreen } from './screens/CardsScreen';
+import { MerchantDashboardScreen } from './screens/MerchantDashboardScreen';
+import { MerchantOnboardingScreen } from './screens/MerchantOnboardingScreen';
+import { SoftPosScreen } from './screens/SoftPosScreen';
+import { SoundBoxScreen } from './screens/SoundBoxScreen';
+
 // Modals
 import { PayBillPinModal } from './screens/PayBillPinModal';
 import { LanguageModal } from './screens/LanguageModal';
@@ -58,6 +69,12 @@ const AppContent: React.FC = () => {
         return <SmsOtpScreen />;
       case 'PERMISSIONS':
         return <PermissionsScreen />;
+      case 'CUSTOMER_KYC':
+        return <CustomerKycScreen />;
+      case 'CUSTOMER_PIN_SETUP':
+        return <CustomerPinSetupScreen />;
+      case 'CUSTOMER_SECURITY_SETUP':
+        return <CustomerSecuritySetupScreen />;
       case 'HOME':
         return <HomeScreen />;
       case 'PAY_ANYONE':
@@ -82,6 +99,18 @@ const AppContent: React.FC = () => {
         return <UPISettingsScreen />;
       case 'PAYMENT_METHODS':
         return <PaymentMethodsScreen />;
+      case 'CARDS':
+        return <CardsScreen />;
+      case 'BILLER_CODE':
+        return <BillerCodeScreen />;
+      case 'MERCHANT_DASHBOARD':
+        return <MerchantDashboardScreen />;
+      case 'MERCHANT_ONBOARDING':
+        return <MerchantOnboardingScreen />;
+      case 'SOFTPOS':
+        return <SoftPosScreen />;
+      case 'SOUND_BOX':
+        return <SoundBoxScreen />;
       case 'SECURITY':
         return <SecurityScreen />;
       case 'NOTIFICATIONS':
@@ -115,6 +144,10 @@ const AppContent: React.FC = () => {
     currentScreen !== 'MOBILE_NUMBER' &&
     currentScreen !== 'SMS_OTP' &&
     currentScreen !== 'PERMISSIONS' &&
+    currentScreen !== 'CUSTOMER_KYC' &&
+    currentScreen !== 'CUSTOMER_PIN_SETUP' &&
+    currentScreen !== 'CUSTOMER_SECURITY_SETUP' &&
+    currentScreen !== 'MERCHANT_ONBOARDING' &&
     currentScreen !== 'PAYMENT_SUCCESS';
 
   return (

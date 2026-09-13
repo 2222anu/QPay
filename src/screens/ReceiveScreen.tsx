@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Download, Share2, Copy, CheckCircle2 } from 'lucide-react';
+import { Download, Share2, Copy, CheckCircle2, Sliders, X } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { QRCodeView } from '../components/QRCodeView';
 import { PrimaryButton } from '../components/PrimaryButton';
@@ -10,7 +10,12 @@ import { qrService } from '../services/qrService';
 export const ReceiveScreen: React.FC = () => {
   const { user, navigateTo } = useApp();
   const [copied, setCopied] = useState(false);
-  const upiQrString = qrService.getUpiQrString(user.upiId, user.name);
+  const [showAmountInput, setShowAmountInput] = useState(false);
+  const [customAmount, setCustomAmount] = useState<string>('');
+  const [customNote, setCustomNote] = useState<string>('');
+
+  const numAmount = parseFloat(customAmount) || undefined;
+  const upiQrString = qrService.getUpiQrString(user.upiId, user.name, numAmount, customNote || undefined);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(user.upiId);
@@ -23,7 +28,9 @@ export const ReceiveScreen: React.FC = () => {
       navigator
         .share({
           title: 'QTPay UPI ID',
-          text: `Pay ${user.name} via QTPay: ${user.upiId}`,
+          text: numAmount
+            ? `Pay ${user.name} ₹${numAmount} via QTPay: ${user.upiId}`
+            : `Pay ${user.name} via QTPay: ${user.upiId}`,
         })
         .catch(() => {});
     } else {
@@ -42,7 +49,7 @@ export const ReceiveScreen: React.FC = () => {
             backgroundColor: '#ffffff',
             border: '1px solid #e2e8f0',
             borderRadius: '24px',
-            padding: '28px 20px',
+            padding: '24px 20px',
             marginBottom: '20px',
             display: 'flex',
             flexDirection: 'column',
@@ -52,17 +59,17 @@ export const ReceiveScreen: React.FC = () => {
           {/* User Avatar */}
           <div
             style={{
-              width: '64px',
-              height: '64px',
+              width: '58px',
+              height: '58px',
               borderRadius: '50%',
               backgroundColor: user.avatarBgColor || '#2e83ff',
               color: '#ffffff',
               fontWeight: 800,
-              fontSize: '22px',
+              fontSize: '20px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              marginBottom: '12px',
+              marginBottom: '10px',
               border: '3px solid #eef5ff',
               overflow: 'hidden',
             }}
@@ -90,8 +97,8 @@ export const ReceiveScreen: React.FC = () => {
               border: '1px solid #d6e6ff',
               borderRadius: '20px',
               padding: '6px 14px',
-              marginTop: '8px',
-              marginBottom: '20px',
+              marginTop: '6px',
+              marginBottom: '16px',
               color: '#2e83ff',
               fontSize: '13px',
               fontWeight: 700,
@@ -104,22 +111,114 @@ export const ReceiveScreen: React.FC = () => {
 
           {/* Machine-Readable QR Code */}
           <div style={{ padding: '8px', backgroundColor: '#ffffff', borderRadius: '16px' }}>
-            <QRCodeView value={upiQrString} size={200} />
+            <QRCodeView value={upiQrString} size={190} />
           </div>
 
-          <div
-            style={{
-              fontSize: '11px',
-              color: '#2e83ff',
-              marginTop: '16px',
-              fontWeight: 800,
-              backgroundColor: '#eef5ff',
-              padding: '4px 12px',
-              borderRadius: '12px',
-              border: '1px solid #d6e6ff',
-            }}
-          >
-            Accepts Any UPI App
+          {/* Dynamic Amount Indicator */}
+          {numAmount && (
+            <div
+              style={{
+                marginTop: '12px',
+                fontSize: '15px',
+                fontWeight: 800,
+                color: '#0f172a',
+                backgroundColor: '#f8fafc',
+                border: '1px solid #e2e8f0',
+                padding: '6px 14px',
+                borderRadius: '12px',
+              }}
+            >
+              Requesting: ₹{numAmount.toLocaleString('en-IN')}
+            </div>
+          )}
+
+          {/* Dynamic Amount Toggle & Config */}
+          <div style={{ marginTop: '14px', width: '100%' }}>
+            {!showAmountInput ? (
+              <button
+                type="button"
+                onClick={() => setShowAmountInput(true)}
+                className="interactive-tap"
+                style={{
+                  background: 'none',
+                  border: '1px dashed #2e83ff',
+                  borderRadius: '10px',
+                  padding: '8px 14px',
+                  color: '#2e83ff',
+                  fontSize: '12px',
+                  fontWeight: 700,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  cursor: 'pointer',
+                }}
+              >
+                <Sliders size={14} /> Set Custom Amount (Dynamic QR)
+              </button>
+            ) : (
+              <div
+                style={{
+                  backgroundColor: '#f8fafc',
+                  border: '1px solid #d6e6ff',
+                  borderRadius: '14px',
+                  padding: '12px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '8px',
+                  textAlign: 'left',
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontSize: '11px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase' }}>
+                    Embedded Dynamic Amount
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowAmountInput(false);
+                      setCustomAmount('');
+                      setCustomNote('');
+                    }}
+                    style={{ background: 'none', border: 'none', color: '#64748b', cursor: 'pointer' }}
+                  >
+                    <X size={14} />
+                  </button>
+                </div>
+                <input
+                  type="number"
+                  placeholder="Enter amount (₹)"
+                  value={customAmount}
+                  onChange={(e) => setCustomAmount(e.target.value)}
+                  className="tabular-nums"
+                  style={{
+                    backgroundColor: '#ffffff',
+                    border: '1.5px solid #2e83ff',
+                    borderRadius: '8px',
+                    padding: '8px 12px',
+                    fontSize: '15px',
+                    fontWeight: 800,
+                    color: '#0f172a',
+                    outline: 'none',
+                  }}
+                />
+                <input
+                  type="text"
+                  placeholder="Optional note (e.g. Lunch split)"
+                  value={customNote}
+                  onChange={(e) => setCustomNote(e.target.value)}
+                  style={{
+                    backgroundColor: '#ffffff',
+                    border: '1px solid #cbd5e1',
+                    borderRadius: '8px',
+                    padding: '8px 12px',
+                    fontSize: '13px',
+                    fontWeight: 600,
+                    color: '#0f172a',
+                    outline: 'none',
+                  }}
+                />
+              </div>
+            )}
           </div>
         </div>
 

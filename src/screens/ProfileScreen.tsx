@@ -19,6 +19,7 @@ import {
   QrCode,
   History,
   CheckCircle2,
+  Store,
 } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { ListRow } from '../components/ListRow';
@@ -238,7 +239,9 @@ export const ProfileScreen: React.FC = () => {
             <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
             <ListRow icon={<Zap size={18} color="#2e83ff" />} label="UPI Settings & PIN" onClick={() => navigateTo('UPI_SETTINGS')} />
             <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
-            <ListRow icon={<CreditCard size={18} color="#2e83ff" />} label="Payment Methods & Cards" onClick={() => navigateTo('PAYMENT_METHODS')} />
+            <ListRow icon={<CreditCard size={18} color="#2e83ff" />} label="Cards Hub (Virtual & Physical)" onClick={() => navigateTo('CARDS')} />
+            <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
+            <ListRow icon={<Store size={18} color="#2e83ff" />} label="Merchant Business & Acceptance Hub" onClick={() => navigateTo('MERCHANT_DASHBOARD')} />
           </div>
         </div>
 
