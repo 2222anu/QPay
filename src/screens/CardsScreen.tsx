@@ -85,7 +85,7 @@ export const CardsScreen: React.FC = () => {
     <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100%', paddingBottom: '36px' }}>
       <AppHeader title="Cards Hub" showBack />
 
-      <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+      <div style={{ padding: '20px clamp(12px, 3.5vw, 20px)', display: 'flex', flexDirection: 'column', gap: '20px' }}>
         {/* Card Selector Pills */}
         <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '2px' }}>
           {cards.map((card, idx) => {
@@ -127,7 +127,7 @@ export const CardsScreen: React.FC = () => {
             style={{
               position: 'relative',
               borderRadius: '20px',
-              padding: '24px 22px',
+              padding: '22px clamp(14px, 3.5vw, 22px)',
               background: currentCard.status === 'FROZEN'
                 ? 'linear-gradient(135deg, #334155 0%, #1e293b 100%)'
                 : 'linear-gradient(135deg, #071529 0%, #0a2540 50%, #1d4ed8 100%)',
@@ -167,7 +167,7 @@ export const CardsScreen: React.FC = () => {
               <div
                 className="tabular-nums"
                 style={{
-                  fontSize: '20px',
+                  fontSize: 'clamp(16px, 4.8vw, 20px)',
                   fontWeight: 800,
                   letterSpacing: '0.12em',
                   color: '#ffffff',
@@ -180,16 +180,16 @@ export const CardsScreen: React.FC = () => {
 
             {/* Bottom Details Row */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-              <div>
+              <div style={{ minWidth: 0, flex: '1 1 auto', marginRight: '8px' }}>
                 <span style={{ fontSize: '9px', color: 'rgba(255, 255, 255, 0.65)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                   Cardholder
                 </span>
-                <div style={{ fontSize: '13px', fontWeight: 800, letterSpacing: '0.02em', textTransform: 'uppercase' }}>
+                <div style={{ fontSize: '12.5px', fontWeight: 800, letterSpacing: '0.02em', textTransform: 'uppercase', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                   {currentCard.cardholderName}
                 </div>
               </div>
 
-              <div style={{ display: 'flex', gap: '20px' }}>
+              <div style={{ display: 'flex', gap: 'clamp(10px, 2.5vw, 20px)', flexShrink: 0 }}>
                 <div>
                   <span style={{ fontSize: '9px', color: 'rgba(255, 255, 255, 0.65)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                     Expires
@@ -229,8 +229,8 @@ export const CardsScreen: React.FC = () => {
               border: '1.5px solid #2e83ff',
               color: '#2e83ff',
               borderRadius: '12px',
-              padding: '12px',
-              fontSize: '13px',
+              padding: '12px 6px',
+              fontSize: 'clamp(11.5px, 3.2vw, 13px)',
               fontWeight: 800,
               cursor: 'pointer',
               display: 'flex',
@@ -252,8 +252,8 @@ export const CardsScreen: React.FC = () => {
               border: `1.5px solid ${currentCard?.status === 'FROZEN' ? '#2e83ff' : '#cbd5e1'}`,
               color: currentCard?.status === 'FROZEN' ? '#2e83ff' : '#0f172a',
               borderRadius: '12px',
-              padding: '12px',
-              fontSize: '13px',
+              padding: '12px 6px',
+              fontSize: 'clamp(11.5px, 3.2vw, 13px)',
               fontWeight: 800,
               cursor: 'pointer',
               display: 'flex',

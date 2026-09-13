@@ -215,6 +215,8 @@ export const MobileNumberScreen: React.FC = () => {
               <input
                 id="mobile-input"
                 type="tel"
+                inputMode="numeric"
+                autoComplete="tel"
                 value={mobileNumber}
                 onChange={(e) => setMobileNumber(e.target.value.replace(/[^0-9]/g, ''))}
                 maxLength={10}
@@ -247,7 +249,7 @@ export const MobileNumberScreen: React.FC = () => {
       <div style={{ marginTop: '20px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '11px', color: '#64748b', fontWeight: 700 }}>
           <Lock size={12} color="#2e83ff" />
-          <span>NPCI & BHIM UPI Certified &bull; 256-Bit Hardware Encryption</span>
+          <span>SAMA & Saudi Payments Certified &bull; 256-Bit Hardware Encryption</span>
         </div>
       </div>
     </div>

@@ -88,7 +88,7 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
 
   const handleScroll = () => {
     if (!carouselRef.current) return;
-    const cardWidth = 310;
+    const cardWidth = Math.min(295, window.innerWidth * 0.8);
     const scrollPos = carouselRef.current.scrollLeft;
     const index = Math.round(scrollPos / cardWidth);
     setActiveCardIndex(Math.min(Math.max(index, 0), banks.length - 1));
@@ -187,7 +187,7 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
               onClick={() => navigateTo('BANK_ACCOUNTS')}
               style={{
                 scrollSnapAlign: 'start',
-                flex: '0 0 300px',
+                flex: '0 0 min(295px, 82vw)',
                 height: '175px',
                 background: style.gradient,
                 borderRadius: '14px',

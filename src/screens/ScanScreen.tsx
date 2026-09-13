@@ -235,7 +235,7 @@ export const ScanScreen: React.FC = () => {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          padding: '16px 20px',
+          padding: 'calc(16px + env(safe-area-inset-top, 0px)) 20px 16px 20px',
           zIndex: 20,
           background: 'linear-gradient(to bottom, rgba(0,0,0,0.85), transparent)',
         }}
@@ -324,8 +324,8 @@ export const ScanScreen: React.FC = () => {
         {/* Viewfinder Target Box with Corner Reticles */}
         <div
           style={{
-            width: '270px',
-            height: '270px',
+            width: 'min(270px, 75vw)',
+            height: 'min(270px, 75vw)',
             borderRadius: '20px',
             position: 'relative',
             zIndex: 10,
@@ -709,7 +709,7 @@ export const ScanScreen: React.FC = () => {
           display: 'flex',
           flexDirection: 'column',
           gap: '10px',
-          padding: '18px 20px',
+          padding: '18px 20px calc(18px + env(safe-area-inset-bottom, 0px)) 20px',
           background: 'linear-gradient(to top, rgba(0,0,0,0.9), transparent)',
           zIndex: 20,
         }}
@@ -722,6 +722,7 @@ export const ScanScreen: React.FC = () => {
               border: '1px solid rgba(255, 255, 255, 0.2)',
               borderRadius: designSystem.radii.md,
               padding: '10px',
+              minHeight: '44px',
               color: '#FFFFFF',
               fontSize: '12px',
               fontWeight: '600',
@@ -742,6 +743,7 @@ export const ScanScreen: React.FC = () => {
               border: '1px solid rgba(255, 255, 255, 0.2)',
               borderRadius: designSystem.radii.md,
               padding: '10px',
+              minHeight: '44px',
               color: '#FFFFFF',
               fontSize: '12px',
               fontWeight: '600',
@@ -762,6 +764,7 @@ export const ScanScreen: React.FC = () => {
               border: 'none',
               borderRadius: designSystem.radii.md,
               padding: '10px',
+              minHeight: '44px',
               color: '#FFFFFF',
               fontSize: '12px',
               fontWeight: '700',

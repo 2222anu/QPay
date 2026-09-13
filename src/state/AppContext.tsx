@@ -20,6 +20,29 @@ import { translate, setGlobalLanguage, type SupportedLanguage } from '../utils/i
 import { applyLanguageToDOM } from '../utils/domTranslator';
 import { formatCurrency } from '../utils/formatters';
 
+export interface MerchantTxn {
+  id: string;
+  customerName: string;
+  time: string;
+  method: string;
+  amount: number;
+  status: 'SUCCESS' | 'PENDING' | 'FAILED';
+  cardScheme?: 'mada' | 'Visa' | 'Mastercard';
+}
+
+export interface MerchantProfile {
+  tradeName: string;
+  legalName: string;
+  crNumber: string;
+  vatNumber: string;
+  category: string;
+  city: string;
+  bankName: string;
+  ibanMasked: string;
+  merchantUpi: string;
+  settlementMode: 'INSTANT' | 'DAILY';
+}
+
 interface AppContextType {
   // Navigation & Screen Stack
   currentScreen: ScreenId;
@@ -88,6 +111,16 @@ interface AppContextType {
 
   terminateSession: (sessionId: string) => void;
   addMoneyRequest: (req: { name: string; upiId: string; amount: number; note?: string }) => void;
+
+  // Merchant Ecosystem
+  accountRole: 'CUSTOMER' | 'MERCHANT';
+  setAccountRole: (role: 'CUSTOMER' | 'MERCHANT') => void;
+  merchantProfile: MerchantProfile;
+  updateMerchantProfile: (updated: Partial<MerchantProfile>) => void;
+  merchantTxns: MerchantTxn[];
+  addMerchantTxn: (txn: Omit<MerchantTxn, 'id'>) => void;
+  todayCollections: number;
+  settleMerchantCollections: () => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -136,6 +169,49 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [notifications, setNotifications] = useState<AppNotification[]>([]);
   const [lastTransaction, setLastTransaction] = useState<Transaction | null>(null);
   const [electricityBill, setElectricityBill] = useState<ElectricityBill | null>(null);
+
+  // Merchant State
+  const [accountRole, setAccountRole] = useState<'CUSTOMER' | 'MERCHANT'>('CUSTOMER');
+  const [merchantProfile, setMerchantProfile] = useState<MerchantProfile>({
+    tradeName: 'Anu Super Retail',
+    legalName: 'Anu Trading & Retail LLC',
+    crNumber: 'CR 1010892412',
+    vatNumber: 'VAT 310294819200003',
+    category: 'Grocery & Supermarket',
+    city: 'Riyadh, Saudi Arabia',
+    bankName: 'Al Rajhi Bank',
+    ibanMasked: 'SA92 8000 •••• •••• 3400 01',
+    merchantUpi: 'anusuper@qtpay',
+    settlementMode: 'INSTANT',
+  });
+
+  const [todayCollections, setTodayCollections] = useState<number>(18450.0);
+  const [merchantTxns, setMerchantTxns] = useState<MerchantTxn[]>([
+    { id: 'm-tx-1', customerName: 'Sara Al-Mansoor', time: '10:42 AM', method: 'mada Contactless', amount: 450.0, status: 'SUCCESS', cardScheme: 'mada' },
+    { id: 'm-tx-2', customerName: 'Tariq Al-Harbi', time: '09:15 AM', method: 'mada Contactless', amount: 1200.0, status: 'SUCCESS', cardScheme: 'mada' },
+    { id: 'm-tx-3', customerName: 'Omar Khalid', time: '08:50 AM', method: 'QR Standee', amount: 85.5, status: 'SUCCESS' },
+    { id: 'm-tx-4', customerName: 'Fahad Al-Otaibi', time: 'Yesterday', method: 'Visa Contactless', amount: 320.0, status: 'SUCCESS', cardScheme: 'Visa' },
+    { id: 'm-tx-5', customerName: 'Noura Al-Zahrani', time: 'Yesterday', method: 'QR Standee', amount: 120.0, status: 'PENDING' },
+  ]);
+
+  const updateMerchantProfile = (updated: Partial<MerchantProfile>) => {
+    setMerchantProfile((prev) => ({ ...prev, ...updated }));
+  };
+
+  const addMerchantTxn = (txn: Omit<MerchantTxn, 'id'>) => {
+    const newTxn: MerchantTxn = {
+      ...txn,
+      id: `m-tx-${Date.now()}`,
+    };
+    setMerchantTxns((prev) => [newTxn, ...prev]);
+    if (txn.status === 'SUCCESS') {
+      setTodayCollections((prev) => prev + txn.amount);
+    }
+  };
+
+  const settleMerchantCollections = () => {
+    setTodayCollections(0);
+  };
   const [moneyRequests, setMoneyRequests] = useState<MoneyRequest[]>([
     {
       id: 'req-1',
@@ -483,6 +559,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setIsEditProfileModalOpen,
         terminateSession,
         addMoneyRequest,
+        accountRole,
+        setAccountRole,
+        merchantProfile,
+        updateMerchantProfile,
+        merchantTxns,
+        addMerchantTxn,
+        todayCollections,
+        settleMerchantCollections,
       }}
     >
       {children}

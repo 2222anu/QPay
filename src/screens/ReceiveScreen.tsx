@@ -38,18 +38,20 @@ export const ReceiveScreen: React.FC = () => {
     }
   };
 
+  const qrSize = typeof window !== 'undefined' ? Math.max(160, Math.min(190, window.innerWidth - 130)) : 190;
+
   return (
-    <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100%', paddingBottom: '30px' }}>
+    <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100%', paddingBottom: 'calc(30px + env(safe-area-inset-bottom, 0px))' }}>
       <AppHeader title="Receive Money" showBack />
 
-      <div style={{ padding: '20px', textAlign: 'center' }}>
+      <div style={{ padding: '20px clamp(12px, 3.5vw, 20px)', textAlign: 'center' }}>
         {/* White QR Showcase Card */}
         <div
           style={{
             backgroundColor: '#ffffff',
             border: '1px solid #e2e8f0',
             borderRadius: '24px',
-            padding: '24px 20px',
+            padding: '24px clamp(14px, 3.5vw, 20px)',
             marginBottom: '20px',
             display: 'flex',
             flexDirection: 'column',
@@ -111,7 +113,7 @@ export const ReceiveScreen: React.FC = () => {
 
           {/* Machine-Readable QR Code */}
           <div style={{ padding: '8px', backgroundColor: '#ffffff', borderRadius: '16px' }}>
-            <QRCodeView value={upiQrString} size={190} />
+            <QRCodeView value={upiQrString} size={qrSize} />
           </div>
 
           {/* Dynamic Amount Indicator */}
@@ -186,6 +188,7 @@ export const ReceiveScreen: React.FC = () => {
                 </div>
                 <input
                   type="number"
+                  inputMode="decimal"
                   placeholder="Enter amount (SAR)"
                   value={customAmount}
                   onChange={(e) => setCustomAmount(e.target.value)}

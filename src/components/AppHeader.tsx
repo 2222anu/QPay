@@ -65,12 +65,13 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
           <button
             onClick={handleBack}
             aria-label="Go back"
+            className="interactive-tap"
             style={{
               backgroundColor: '#f8fafc',
               border: '1px solid #e2e8f0',
               color: '#0f172a',
-              width: '38px',
-              height: '38px',
+              width: '40px',
+              height: '40px',
               borderRadius: '10px',
               display: 'flex',
               alignItems: 'center',
@@ -80,7 +81,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
               transition: 'background-color 0.15s ease, transform 0.1s ease',
             }}
           >
-            <ArrowLeft size={18} />
+            <ArrowLeft size={19} />
           </button>
         ) : (
           <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -129,9 +130,22 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
       </div>
 
       {/* Center Slot: Official Vector Logo or Page Title */}
-      <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '0 8px' }}>
+      <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '0 8px', minWidth: 0 }}>
         {title ? (
-          <h2 style={{ fontSize: '17px', fontWeight: '800', color: '#0f172a', margin: 0, textAlign: 'center', letterSpacing: '-0.01em' }}>
+          <h2
+            style={{
+              fontSize: '16.5px',
+              fontWeight: '800',
+              color: '#0f172a',
+              margin: 0,
+              textAlign: 'center',
+              letterSpacing: '-0.01em',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              maxWidth: '100%',
+            }}
+          >
             {title}
           </h2>
         ) : (
@@ -172,12 +186,13 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
           <button
             onClick={() => navigateTo('UPI_SETTINGS')}
             aria-label="UPI Settings"
+            className="interactive-tap"
             style={{
               backgroundColor: '#f8fafc',
               border: '1px solid #e2e8f0',
               color: '#0f172a',
-              width: '38px',
-              height: '38px',
+              width: '40px',
+              height: '40px',
               borderRadius: '10px',
               display: 'flex',
               alignItems: 'center',
@@ -187,7 +202,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
               transition: 'background-color 0.15s ease',
             }}
           >
-            <Settings size={18} />
+            <Settings size={19} />
           </button>
         )}
       </div>

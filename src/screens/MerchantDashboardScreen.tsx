@@ -3,7 +3,6 @@ import {
   Store,
   QrCode,
   Smartphone,
-  Volume2,
   Download,
   Share2,
   CheckCircle2,
@@ -11,7 +10,10 @@ import {
   Landmark,
   ShieldCheck,
   PlusCircle,
-  ArrowRight,
+  ChevronRight,
+  Lock,
+  Settings,
+  HelpCircle,
 } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { QRCodeView } from '../components/QRCodeView';
@@ -21,29 +23,16 @@ import { Modal } from '../components/Modal';
 import { useApp } from '../state/AppContext';
 import { formatCurrency } from '../utils/formatters';
 
-interface MerchantTxn {
-  id: string;
-  customerName: string;
-  time: string;
-  method: string;
-  amount: number;
-  status: 'SUCCESS' | 'PENDING';
-}
-
-const INITIAL_MERCHANT_TXNS: MerchantTxn[] = [
-  { id: 'm-tx-1', customerName: 'Sara Al-Mansoor', time: '10:42 AM', method: 'QR Standee', amount: 450.0, status: 'SUCCESS' },
-  { id: 'm-tx-2', customerName: 'Tariq Al-Harbi', time: '09:15 AM', method: 'SoftPOS Tap', amount: 1200.0, status: 'SUCCESS' },
-  { id: 'm-tx-3', customerName: 'Omar Khalid', time: '08:50 AM', method: 'QR Standee', amount: 85.5, status: 'SUCCESS' },
-  { id: 'm-tx-4', customerName: 'Fahad Al-Otaibi', time: 'Yesterday', method: 'SoftPOS Tap', amount: 320.0, status: 'SUCCESS' },
-  { id: 'm-tx-5', customerName: 'Noura Al-Zahrani', time: 'Yesterday', method: 'QR Standee', amount: 120.0, status: 'PENDING' },
-];
-
 export const MerchantDashboardScreen: React.FC = () => {
-  const { navigateTo } = useApp();
+  const {
+    navigateTo,
+    merchantProfile,
+    todayCollections,
+    merchantTxns,
+    addMerchantTxn,
+    settleMerchantCollections,
+  } = useApp();
 
-  const [todayCollections, setTodayCollections] = useState<number>(18450.0);
-  const [totalSalesCount, setTotalSalesCount] = useState<number>(34);
-  const [merchantTxns, setMerchantTxns] = useState<MerchantTxn[]>(INITIAL_MERCHANT_TXNS);
   const [txnFilter, setTxnFilter] = useState<'ALL' | 'SUCCESS' | 'PENDING'>('ALL');
 
   // Modals State
@@ -57,24 +46,14 @@ export const MerchantDashboardScreen: React.FC = () => {
   const [acceptAmount, setAcceptAmount] = useState<string>('150');
   const [paymentReceivedSimulated, setPaymentReceivedSimulated] = useState(false);
 
-  // Saudi Merchant Business Credentials
-  const merchantProfile = {
-    tradeName: 'Anu Super Retail',
-    legalName: 'Anu Trading & Retail LLC',
-    crNumber: 'CR 1010892412',
-    vatNumber: 'VAT 310294819200003',
-    city: 'Riyadh, Saudi Arabia',
-    bankName: 'Al Rajhi Bank',
-    ibanMasked: 'SA92 8000 •••• •••• 3400 01',
-    merchantUpi: 'anusuper@qtpay',
-  };
-
   const qrPayload = `upi://pay?pa=${encodeURIComponent(merchantProfile.merchantUpi)}&pn=${encodeURIComponent(merchantProfile.tradeName)}&mc=5411&cu=SAR`;
   const dynamicQrPayload = `upi://pay?pa=${encodeURIComponent(merchantProfile.merchantUpi)}&pn=${encodeURIComponent(merchantProfile.tradeName)}&am=${acceptAmount || '0'}&cu=SAR`;
 
+  const totalSalesCount = merchantTxns.filter((t) => t.status === 'SUCCESS').length;
+
   const handleInstantPayout = () => {
     setSettlementSuccess(true);
-    setTodayCollections(0);
+    settleMerchantCollections();
     setTimeout(() => setSettlementSuccess(false), 3500);
   };
 
@@ -83,23 +62,18 @@ export const MerchantDashboardScreen: React.FC = () => {
     if (num <= 0) return;
 
     setPaymentReceivedSimulated(true);
-    const newTxn: MerchantTxn = {
-      id: `m-tx-${Date.now()}`,
+    addMerchantTxn({
       customerName: 'Customer Walk-in',
       time: 'Just now',
       method: 'Instant QR Receive',
       amount: num,
       status: 'SUCCESS',
-    };
-
-    setMerchantTxns((prev) => [newTxn, ...prev]);
-    setTodayCollections((prev) => prev + num);
-    setTotalSalesCount((prev) => prev + 1);
+    });
 
     setTimeout(() => {
       setPaymentReceivedSimulated(false);
       setIsAcceptPaymentModalOpen(false);
-    }, 1600);
+    }, 1200);
   };
 
   const filteredTxns = merchantTxns.filter((t) => {
@@ -133,7 +107,7 @@ export const MerchantDashboardScreen: React.FC = () => {
         }
       />
 
-      <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+      <div style={{ padding: '20px clamp(12px, 3.5vw, 20px)', display: 'flex', flexDirection: 'column', gap: '20px' }}>
         {/* Merchant Store Luxury Hero Card */}
         <div
           style={{
@@ -166,7 +140,7 @@ export const MerchantDashboardScreen: React.FC = () => {
                   {merchantProfile.tradeName}
                 </h2>
                 <div style={{ fontSize: '11.5px', color: '#82b5ff', marginTop: '2px' }}>
-                  {merchantProfile.crNumber} &bull; {merchantProfile.city}
+                  CR {merchantProfile.crNumber} &bull; {merchantProfile.city}
                 </div>
               </div>
             </div>
@@ -188,7 +162,7 @@ export const MerchantDashboardScreen: React.FC = () => {
                 cursor: 'pointer',
               }}
             >
-              <CheckCircle2 size={12} color="#38bdf8" /> VERIFIED MERCHANT
+              <CheckCircle2 size={12} color="#38bdf8" /> VERIFIED
             </button>
           </div>
 
@@ -206,13 +180,13 @@ export const MerchantDashboardScreen: React.FC = () => {
           >
             <div>
               <span style={{ fontSize: '11px', color: '#cbd5e1', fontWeight: 700, textTransform: 'uppercase' }}>
-                Today's Collections
+                Today's Collections (SAR)
               </span>
               <div className="tabular-nums" style={{ fontSize: '26px', fontWeight: 900, color: '#ffffff', marginTop: '2px' }}>
                 {formatCurrency(todayCollections)}
               </div>
               <div style={{ fontSize: '11px', color: '#38bdf8', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px', marginTop: '2px' }}>
-                <TrendingUp size={13} /> {totalSalesCount} customer payments received today
+                <TrendingUp size={13} /> {totalSalesCount} customer payments received
               </div>
             </div>
 
@@ -253,9 +227,58 @@ export const MerchantDashboardScreen: React.FC = () => {
                 gap: '6px',
               }}
             >
-              <CheckCircle2 size={14} /> Payout of {formatCurrency(18450.0)} transferred to {merchantProfile.bankName} instantly!
+              <CheckCircle2 size={14} /> Payout transferred to {merchantProfile.bankName} instantly!
             </div>
           )}
+        </div>
+
+        {/* PRIMARY ACTION: SOFTPOS TAP TO COLLECT */}
+        <div
+          onClick={() => navigateTo('SOFTPOS')}
+          className="interactive-tap"
+          style={{
+            backgroundColor: '#ffffff',
+            border: '2px solid #2e83ff',
+            borderRadius: '18px',
+            padding: '16px 18px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            cursor: 'pointer',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+            <div
+              style={{
+                width: '46px',
+                height: '46px',
+                borderRadius: '14px',
+                backgroundColor: '#eef5ff',
+                color: '#2e83ff',
+                border: '1px solid #d6e6ff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+              }}
+            >
+              <Smartphone size={24} />
+            </div>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ fontSize: '15px', fontWeight: 900, color: '#0f172a' }}>
+                  Collect via SoftPOS
+                </span>
+                <span style={{ fontSize: '10px', fontWeight: 800, color: '#2e83ff', backgroundColor: '#eef5ff', border: '1px solid #d6e6ff', padding: '1px 6px', borderRadius: '6px' }}>
+                  mada Tap
+                </span>
+              </div>
+              <div style={{ fontSize: '11.5px', color: '#64748b', marginTop: '2px' }}>
+                Accept card taps (mada, Visa, Mastercard) directly on this phone
+              </div>
+            </div>
+          </div>
+          <ChevronRight size={20} color="#2e83ff" style={{ flexShrink: 0 }} />
         </div>
 
         {/* Financial Metrics Strip: Successful, Pending, Failed & Total Sales */}
@@ -293,9 +316,11 @@ export const MerchantDashboardScreen: React.FC = () => {
               Pending
             </div>
             <div className="tabular-nums" style={{ fontSize: '15px', fontWeight: 900, color: '#f59e0b', marginTop: '2px' }}>
-              1
+              {merchantTxns.filter((t) => t.status === 'PENDING').length}
             </div>
-            <div style={{ fontSize: '10px', color: '#64748b' }}>{formatCurrency(120.0)}</div>
+            <div style={{ fontSize: '10px', color: '#64748b', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              SAR 120.00
+            </div>
           </div>
 
           {/* Failed */}
@@ -321,7 +346,7 @@ export const MerchantDashboardScreen: React.FC = () => {
         {/* 4 Core Quick Actions */}
         <div>
           <div style={{ fontSize: '11px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px', marginLeft: '4px' }}>
-            Merchant Quick Actions
+            Merchant Quick Tools
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px' }}>
@@ -331,7 +356,7 @@ export const MerchantDashboardScreen: React.FC = () => {
               className="interactive-tap"
               style={{
                 backgroundColor: '#ffffff',
-                border: '1.5px solid #2e83ff',
+                border: '1px solid #e2e8f0',
                 borderRadius: '14px',
                 padding: '12px 6px',
                 display: 'flex',
@@ -356,10 +381,10 @@ export const MerchantDashboardScreen: React.FC = () => {
               >
                 <PlusCircle size={20} />
               </div>
-              <span style={{ fontSize: '11px', fontWeight: 800, color: '#2e83ff' }}>Accept Pay</span>
+              <span style={{ fontSize: '11px', fontWeight: 800, color: '#2e83ff' }}>Dynamic QR</span>
             </div>
 
-            {/* 2. Merchant QR */}
+            {/* 2. Merchant QR Standee */}
             <div
               onClick={() => setIsQrModalOpen(true)}
               className="interactive-tap"
@@ -393,41 +418,7 @@ export const MerchantDashboardScreen: React.FC = () => {
               <span style={{ fontSize: '11px', fontWeight: 800, color: '#0f172a' }}>Store QR</span>
             </div>
 
-            {/* 3. SoftPOS Tap */}
-            <div
-              onClick={() => navigateTo('SOFTPOS')}
-              className="interactive-tap"
-              style={{
-                backgroundColor: '#ffffff',
-                border: '1px solid #e2e8f0',
-                borderRadius: '14px',
-                padding: '12px 6px',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                textAlign: 'center',
-                gap: '6px',
-                cursor: 'pointer',
-              }}
-            >
-              <div
-                style={{
-                  width: '38px',
-                  height: '38px',
-                  borderRadius: '10px',
-                  backgroundColor: '#f8fafc',
-                  color: '#0f172a',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <Smartphone size={20} />
-              </div>
-              <span style={{ fontSize: '11px', fontWeight: 800, color: '#0f172a' }}>SoftPOS</span>
-            </div>
-
-            {/* 4. Settlement Info */}
+            {/* 3. Settlement Info */}
             <div
               onClick={() => setIsSettlementModalOpen(true)}
               className="interactive-tap"
@@ -460,55 +451,48 @@ export const MerchantDashboardScreen: React.FC = () => {
               </div>
               <span style={{ fontSize: '11px', fontWeight: 800, color: '#0f172a' }}>Settlement</span>
             </div>
-          </div>
-        </div>
 
-        {/* Hardware SoundBox Voice Banner */}
-        <div
-          onClick={() => navigateTo('SOUND_BOX')}
-          className="interactive-tap"
-          style={{
-            backgroundColor: '#ffffff',
-            border: '1px solid #e2e8f0',
-            borderRadius: '16px',
-            padding: '14px 16px',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            cursor: 'pointer',
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            {/* 4. Merchant Profile / Settings */}
             <div
+              onClick={() => setIsBusinessInfoModalOpen(true)}
+              className="interactive-tap"
               style={{
-                width: '40px',
-                height: '40px',
-                borderRadius: '12px',
-                backgroundColor: '#eef5ff',
-                color: '#2e83ff',
-                border: '1px solid #d6e6ff',
+                backgroundColor: '#ffffff',
+                border: '1px solid #e2e8f0',
+                borderRadius: '14px',
+                padding: '12px 6px',
                 display: 'flex',
+                flexDirection: 'column',
                 alignItems: 'center',
-                justifyContent: 'center',
+                textAlign: 'center',
+                gap: '6px',
+                cursor: 'pointer',
               }}
             >
-              <Volume2 size={20} />
-            </div>
-            <div>
-              <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#0f172a' }}>QTPay Smart Sound Box</div>
-              <div style={{ fontSize: '11px', color: '#10b981', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
-                <CheckCircle2 size={12} /> Paired &bull; 4G Active &bull; Arabic / English
+              <div
+                style={{
+                  width: '38px',
+                  height: '38px',
+                  borderRadius: '10px',
+                  backgroundColor: '#f8fafc',
+                  color: '#0f172a',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Settings size={20} />
               </div>
+              <span style={{ fontSize: '11px', fontWeight: 800, color: '#0f172a' }}>Settings</span>
             </div>
           </div>
-          <ArrowRight size={16} color="#64748b" />
         </div>
 
-        {/* Received Transactions Table */}
+        {/* COLLECTIONS / RECEIVED TRANSACTIONS SECTION */}
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
             <div style={{ fontSize: '11px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', marginLeft: '4px' }}>
-              Recent Received Payments
+              Recent Collections Log
             </div>
 
             <div style={{ display: 'flex', gap: '6px' }}>
@@ -547,7 +531,7 @@ export const MerchantDashboardScreen: React.FC = () => {
           >
             {filteredTxns.length === 0 ? (
               <div style={{ textAlign: 'center', padding: '20px 0', color: '#64748b', fontSize: '13px' }}>
-                No payments found for this filter.
+                No collections found for this filter.
               </div>
             ) : (
               filteredTxns.map((txn, index) => (
@@ -614,13 +598,13 @@ export const MerchantDashboardScreen: React.FC = () => {
               textAlign: 'center',
             }}
           >
-            Update Business Onboarding &amp; KYB Data &rarr;
+            Update Business Profile &amp; KYB Data &rarr;
           </button>
         </div>
       </div>
 
       {/* Modal 1: Accept Payment (Dynamic Amount & QR / SoftPOS) */}
-      <Modal isOpen={isAcceptPaymentModalOpen} onClose={() => setIsAcceptPaymentModalOpen(false)} title="Accept Payment">
+      <Modal isOpen={isAcceptPaymentModalOpen} onClose={() => setIsAcceptPaymentModalOpen(false)} title="Accept Dynamic Payment">
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '16px', padding: '10px 0' }}>
           <div style={{ width: '100%' }}>
             <label style={{ fontSize: '11px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', marginBottom: '6px', display: 'block', textAlign: 'left' }}>
@@ -641,6 +625,7 @@ export const MerchantDashboardScreen: React.FC = () => {
               <span style={{ fontSize: '24px', fontWeight: 900, color: '#2e83ff' }}>SAR</span>
               <input
                 type="number"
+                inputMode="decimal"
                 value={acceptAmount}
                 onChange={(e) => setAcceptAmount(e.target.value)}
                 placeholder="0"
@@ -659,80 +644,15 @@ export const MerchantDashboardScreen: React.FC = () => {
             </div>
           </div>
 
-          {/* Quick preset amount chips */}
-          <div style={{ display: 'flex', gap: '8px', width: '100%', justifyContent: 'center' }}>
-            {['50', '100', '250', '500'].map((preset) => (
-              <button
-                key={preset}
-                type="button"
-                onClick={() => setAcceptAmount(preset)}
-                className="interactive-tap"
-                style={{
-                  backgroundColor: acceptAmount === preset ? '#eef5ff' : '#ffffff',
-                  border: acceptAmount === preset ? '1.5px solid #2e83ff' : '1px solid #cbd5e1',
-                  color: acceptAmount === preset ? '#2e83ff' : '#0f172a',
-                  borderRadius: '16px',
-                  padding: '5px 12px',
-                  fontSize: '12px',
-                  fontWeight: 700,
-                  cursor: 'pointer',
-                }}
-              >
-                SAR {preset}
-              </button>
-            ))}
+          {/* Machine-readable dynamic QR */}
+          <div style={{ padding: '8px', backgroundColor: '#ffffff', borderRadius: '16px', border: '1px solid #e2e8f0' }}>
+            <QRCodeView value={dynamicQrPayload} size={170} />
           </div>
-
-          {/* Dynamic Generated QR Display */}
-          <div
-            style={{
-              backgroundColor: '#ffffff',
-              border: '2px solid #2e83ff',
-              borderRadius: '16px',
-              padding: '18px',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-            <QRCodeView value={dynamicQrPayload} size={160} />
-            <div style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a', marginTop: '10px' }}>
-              Scan to Pay {formatCurrency(parseFloat(acceptAmount) || 0)}
-            </div>
-            <div style={{ fontSize: '11px', color: '#64748b' }}>
-              Customer can scan with QTPay or any banking app
-            </div>
-          </div>
-
-          {paymentReceivedSimulated && (
-            <div
-              className="fade-in"
-              style={{
-                backgroundColor: 'rgba(16, 185, 129, 0.15)',
-                border: '1px solid #10b981',
-                borderRadius: '10px',
-                padding: '10px',
-                color: '#10b981',
-                fontWeight: 800,
-                fontSize: '13px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                width: '100%',
-                justifyContent: 'center',
-              }}
-            >
-              <CheckCircle2 size={16} /> Payment Received Successfully!
-            </div>
-          )}
 
           <div style={{ display: 'flex', gap: '10px', width: '100%' }}>
             <PrimaryButton onClick={handleSimulateReceivePayment} disabled={paymentReceivedSimulated}>
-              Simulate Customer Payment
+              {paymentReceivedSimulated ? 'Payment Received! Processing...' : 'Simulate Customer Payment'}
             </PrimaryButton>
-            <SecondaryButton onClick={() => { setIsAcceptPaymentModalOpen(false); navigateTo('SOFTPOS'); }}>
-              SoftPOS Tap
-            </SecondaryButton>
           </div>
         </div>
       </Modal>
@@ -777,14 +697,14 @@ export const MerchantDashboardScreen: React.FC = () => {
         </div>
       </Modal>
 
-      {/* Modal 3: Business Information & Verification */}
-      <Modal isOpen={isBusinessInfoModalOpen} onClose={() => setIsBusinessInfoModalOpen(false)} title="Merchant Business Details">
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', padding: '10px 0' }}>
+      {/* Modal 3: Business Information & Settings (Section 16) */}
+      <Modal isOpen={isBusinessInfoModalOpen} onClose={() => setIsBusinessInfoModalOpen(false)} title="Merchant Profile & Settings">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', padding: '6px 0' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', backgroundColor: '#eef5ff', border: '1px solid #d6e6ff', padding: '10px 14px', borderRadius: '12px' }}>
             <ShieldCheck size={20} color="#2e83ff" />
             <div>
               <div style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a' }}>Verified Commercial Entity</div>
-              <div style={{ fontSize: '11px', color: '#64748b' }}>Ministry of Commerce (MOC) Validated</div>
+              <div style={{ fontSize: '11px', color: '#64748b' }}>Ministry of Commerce (MOC) &bull; SAMA Regulated</div>
             </div>
           </div>
 
@@ -799,14 +719,14 @@ export const MerchantDashboardScreen: React.FC = () => {
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', fontSize: '12.5px' }}>
               <span style={{ color: '#64748b' }}>CR Number:</span>
-              <span style={{ fontWeight: 800, color: '#0f172a' }}>1010892412</span>
+              <span style={{ fontWeight: 800, color: '#0f172a' }}>{merchantProfile.crNumber}</span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', fontSize: '12.5px' }}>
-              <span style={{ color: '#64748b' }}>VAT Number:</span>
-              <span style={{ fontWeight: 800, color: '#0f172a' }}>310294819200003</span>
+              <span style={{ color: '#64748b' }}>Category:</span>
+              <span style={{ fontWeight: 700, color: '#0f172a' }}>{merchantProfile.category}</span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', fontSize: '12.5px' }}>
-              <span style={{ color: '#64748b' }}>Location:</span>
+              <span style={{ color: '#64748b' }}>City:</span>
               <span style={{ fontWeight: 800, color: '#0f172a' }}>{merchantProfile.city}</span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', fontSize: '12.5px' }}>
@@ -815,8 +735,74 @@ export const MerchantDashboardScreen: React.FC = () => {
             </div>
           </div>
 
+          {/* Quick Shortcuts to Reusable Settings Screens (Section 16) */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <div
+              onClick={() => { setIsBusinessInfoModalOpen(false); navigateTo('BANK_ACCOUNTS'); }}
+              className="interactive-tap"
+              style={{
+                backgroundColor: '#ffffff',
+                border: '1px solid #e2e8f0',
+                borderRadius: '12px',
+                padding: '10px 14px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                cursor: 'pointer',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <Landmark size={16} color="#2e83ff" />
+                <span style={{ fontSize: '13px', fontWeight: 700, color: '#0f172a' }}>Bank Accounts &amp; Payouts</span>
+              </div>
+              <ChevronRight size={16} color="#94a3b8" />
+            </div>
+
+            <div
+              onClick={() => { setIsBusinessInfoModalOpen(false); navigateTo('SECURITY'); }}
+              className="interactive-tap"
+              style={{
+                backgroundColor: '#ffffff',
+                border: '1px solid #e2e8f0',
+                borderRadius: '12px',
+                padding: '10px 14px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                cursor: 'pointer',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <Lock size={16} color="#2e83ff" />
+                <span style={{ fontSize: '13px', fontWeight: 700, color: '#0f172a' }}>Security &amp; PIN Management</span>
+              </div>
+              <ChevronRight size={16} color="#94a3b8" />
+            </div>
+
+            <div
+              onClick={() => { setIsBusinessInfoModalOpen(false); navigateTo('HELP_SUPPORT'); }}
+              className="interactive-tap"
+              style={{
+                backgroundColor: '#ffffff',
+                border: '1px solid #e2e8f0',
+                borderRadius: '12px',
+                padding: '10px 14px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                cursor: 'pointer',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <HelpCircle size={16} color="#2e83ff" />
+                <span style={{ fontSize: '13px', fontWeight: 700, color: '#0f172a' }}>Help &amp; Merchant Support</span>
+              </div>
+              <ChevronRight size={16} color="#94a3b8" />
+            </div>
+          </div>
+
           <PrimaryButton onClick={() => setIsBusinessInfoModalOpen(false)}>
-            Done
+            Close Settings
           </PrimaryButton>
         </div>
       </Modal>

@@ -24,6 +24,7 @@ export const PrimaryButton: React.FC<PrimaryButtonProps> = ({
         border: 'none',
         borderRadius: '10px',
         padding: '14px 20px',
+        minHeight: '48px',
         fontSize: '15px',
         fontWeight: 800,
         letterSpacing: '0.01em',

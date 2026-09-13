@@ -141,7 +141,7 @@ export const HistoryScreen: React.FC = () => {
       />
 
       {/* Top View Selector: [ Transactions ] / [ Spent Analysis ] */}
-      <div style={{ padding: '0 20px', marginBottom: '16px' }}>
+      <div style={{ padding: '0 clamp(12px, 3.5vw, 20px)', marginBottom: '16px' }}>
         <div
           style={{
             display: 'flex',
@@ -206,7 +206,7 @@ export const HistoryScreen: React.FC = () => {
 
       {/* VIEW MODE 1: SPENT ANALYSIS DASHBOARD */}
       {viewMode === 'analysis' && (
-        <div style={{ padding: '0 20px', display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '24px' }}>
+        <div style={{ padding: '0 clamp(12px, 3.5vw, 20px)', display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '24px' }}>
           {/* Timeframe Filter Selector */}
           <div style={{ display: 'flex', gap: '8px' }}>
             {[
@@ -311,7 +311,7 @@ export const HistoryScreen: React.FC = () => {
               backgroundColor: '#ffffff',
               border: '1px solid #e2e8f0',
               borderRadius: '16px',
-              padding: '16px 18px',
+              padding: '16px clamp(10px, 3vw, 18px)',
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
@@ -325,13 +325,13 @@ export const HistoryScreen: React.FC = () => {
             {/* Bars container */}
             <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'flex-end', height: '110px', paddingTop: '10px' }}>
               {spentMetrics.weeklyTrends.map((trend, i) => (
-                <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px', flex: 1 }}>
-                  <span className="tabular-nums" style={{ fontSize: '10px', fontWeight: 700, color: trend.isCurrent ? '#2e83ff' : '#64748b' }}>
-                    {formatCurrency(trend.amount)}
+                <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px', flex: 1, minWidth: 0 }}>
+                  <span className="tabular-nums" style={{ fontSize: '10px', fontWeight: 700, color: trend.isCurrent ? '#2e83ff' : '#64748b', whiteSpace: 'nowrap' }}>
+                    SAR {Math.round(trend.amount).toLocaleString('en-US')}
                   </span>
                   <div
                     style={{
-                      width: '28px',
+                      width: 'clamp(18px, 5.5vw, 28px)',
                       height: trend.height,
                       backgroundColor: trend.isCurrent ? '#2e83ff' : '#e2e8f0',
                       borderRadius: '6px 6px 2px 2px',
@@ -465,7 +465,7 @@ export const HistoryScreen: React.FC = () => {
             onClick={() => setViewMode('analysis')}
             className="interactive-tap"
             style={{
-              margin: '0 20px 16px 20px',
+              margin: '0 clamp(12px, 3.5vw, 20px) 16px clamp(12px, 3.5vw, 20px)',
               backgroundColor: '#ffffff',
               border: '1px solid #e2e8f0',
               borderRadius: '14px',
@@ -506,7 +506,7 @@ export const HistoryScreen: React.FC = () => {
 
           {/* Search Input Bar */}
           {showSearchInput && (
-            <div style={{ padding: '0 20px', marginBottom: '16px' }}>
+            <div style={{ padding: '0 clamp(12px, 3.5vw, 20px)', marginBottom: '16px' }}>
               <div
                 style={{
                   display: 'flex',
@@ -560,7 +560,7 @@ export const HistoryScreen: React.FC = () => {
             style={{
               display: 'flex',
               gap: '8px',
-              padding: '0 20px',
+              padding: '0 clamp(12px, 3.5vw, 20px)',
               marginBottom: '18px',
               overflowX: 'auto',
             }}
@@ -594,7 +594,7 @@ export const HistoryScreen: React.FC = () => {
 
           {/* Active Category Filter Pill if Selected */}
           {selectedCategory && (
-            <div style={{ padding: '0 20px', marginBottom: '14px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div style={{ padding: '0 clamp(12px, 3.5vw, 20px)', marginBottom: '14px', display: 'flex', alignItems: 'center', gap: '8px' }}>
               <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 700 }}>Filtered by:</span>
               <span
                 style={{
@@ -617,7 +617,7 @@ export const HistoryScreen: React.FC = () => {
           )}
 
           {/* Grouped Transaction Lists */}
-          <div style={{ padding: '0 20px', marginBottom: '24px' }}>
+          <div style={{ padding: '0 clamp(12px, 3.5vw, 20px)', marginBottom: '24px' }}>
             {Object.keys(groupedByDate).length === 0 ? (
               <div
                 style={{

@@ -26,7 +26,7 @@ export const QPayHeroBanner: React.FC = () => {
       <style>{`
         .qpay-hero-banner-container {
           position: relative;
-          margin: 14px 20px 0 20px;
+          margin: 14px auto 0 auto;
           border-radius: 10px;
           background: #ffffff;
           border: 1px solid #d6e6ff;
@@ -35,7 +35,7 @@ export const QPayHeroBanner: React.FC = () => {
           aspect-ratio: 1024 / 394;
           min-height: 135px;
           max-height: 200px;
-          width: calc(100% - 40px);
+          width: calc(100% - 2 * clamp(12px, 3.5vw, 20px));
           animation: bannerEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
           contain: paint layout;
           transform: translateZ(0);

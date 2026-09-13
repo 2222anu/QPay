@@ -38,7 +38,8 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '16px 8px',
+        padding: '14px 6px',
+        minHeight: '80px',
         backgroundColor: bgColor,
         border: `1px solid ${borderColor}`,
         borderRadius: '12px',
@@ -79,7 +80,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
           alignItems: 'center',
           justifyContent: 'center',
           color: iconColor,
-          marginBottom: '10px',
+          marginBottom: '8px',
           border: '1px solid #d6e6ff',
         }}
       >
@@ -87,11 +88,14 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
       </div>
       <span
         style={{
-          fontSize: '11.5px',
+          fontSize: '11px',
           fontWeight: 700,
           color: '#0f172a',
-          lineHeight: '14px',
+          lineHeight: '13.5px',
           letterSpacing: '-0.01em',
+          wordBreak: 'keep-all',
+          maxWidth: '100%',
+          display: 'block',
         }}
       >
         {label}

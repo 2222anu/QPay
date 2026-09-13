@@ -34,32 +34,16 @@ export const Modal: React.FC<ModalProps> = ({
       role="dialog"
       aria-modal="true"
       aria-labelledby={title ? 'modal-title' : undefined}
-      style={{
-        position: 'fixed',
-        inset: 0,
-        backgroundColor: 'rgba(15, 23, 42, 0.65)',
-        backdropFilter: 'blur(8px)',
-        zIndex: 50,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '20px',
-      }}
+      className="modal-overlay"
       onClick={onClose}
     >
       <div
-        className="fade-in"
+        className="modal-container"
         onClick={(e) => e.stopPropagation()}
-        style={{
-          width: '100%',
-          maxWidth: '420px',
-          backgroundColor: '#ffffff',
-          border: '1px solid #e2e8f0',
-          borderRadius: '16px',
-          padding: '24px',
-          boxShadow: 'none',
-        }}
       >
+        {/* Mobile Drag Indicator Handle */}
+        <div className="mobile-drag-handle" />
+
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px' }}>
           {title ? (
             <h3 id="modal-title" style={{ fontSize: '17px', fontWeight: 800, color: '#0f172a', margin: 0, letterSpacing: '-0.01em' }}>
@@ -71,13 +55,13 @@ export const Modal: React.FC<ModalProps> = ({
           <button
             onClick={onClose}
             aria-label="Close modal"
-            className="interactive-tap"
+            className="interactive-tap modal-close-btn"
             style={{
               backgroundColor: '#f8fafc',
               border: '1px solid #e2e8f0',
               color: '#64748b',
-              width: '32px',
-              height: '32px',
+              width: '36px',
+              height: '36px',
               borderRadius: '50%',
               display: 'flex',
               alignItems: 'center',
@@ -86,7 +70,7 @@ export const Modal: React.FC<ModalProps> = ({
               boxShadow: 'none',
             }}
           >
-            <X size={16} />
+            <X size={18} />
           </button>
         </div>
         {children}

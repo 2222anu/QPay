@@ -118,30 +118,33 @@ export const SendAmountScreen: React.FC = () => {
               marginBottom: '20px',
             }}
           >
-            <span style={{ fontSize: '26px', fontWeight: 800, color: '#2e83ff' }}>SAR</span>
+            <span style={{ fontSize: '24px', fontWeight: 800, color: '#2e83ff' }}>SAR</span>
             <input
               type="number"
+              inputMode="decimal"
               value={amountStr}
               onChange={(e) => setAmountStr(e.target.value)}
               placeholder="0"
               autoFocus
               className="tabular-nums"
               style={{
-                fontSize: '48px',
+                fontSize: amountStr.length > 5 ? '34px' : '44px',
                 fontWeight: 900,
                 color: '#0f172a',
                 background: 'none',
                 border: 'none',
                 outline: 'none',
-                width: '240px',
+                maxWidth: '220px',
+                width: '100%',
                 textAlign: 'center',
                 padding: 0,
+                transition: 'font-size 0.15s ease',
               }}
             />
           </div>
 
           {/* Quick Amount Chips */}
-          <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '18px' }}>
+          <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '4px', scrollbarWidth: 'none', justifyContent: 'center' }}>
             {['100', '500', '1000', '2000', '5000'].map((val) => {
               const isSelected = amountStr === val;
               return (
@@ -155,10 +158,12 @@ export const SendAmountScreen: React.FC = () => {
                     border: isSelected ? '1.5px solid #2e83ff' : '1px solid #e2e8f0',
                     color: isSelected ? '#2e83ff' : '#0f172a',
                     borderRadius: '20px',
-                    padding: '8px 16px',
-                    fontSize: '13px',
+                    padding: '8px 14px',
+                    fontSize: '12.5px',
                     fontWeight: 700,
                     cursor: 'pointer',
+                    whiteSpace: 'nowrap',
+                    flexShrink: 0,
                     transition: 'all 0.15s ease',
                   }}
                 >

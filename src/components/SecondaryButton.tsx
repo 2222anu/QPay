@@ -24,6 +24,7 @@ export const SecondaryButton: React.FC<SecondaryButtonProps> = ({
         border: '1.5px solid #cbd5e1',
         borderRadius: '10px',
         padding: '13px 20px',
+        minHeight: '48px',
         fontSize: '15px',
         fontWeight: 700,
         cursor: disabled ? 'not-allowed' : 'pointer',
